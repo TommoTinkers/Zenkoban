@@ -5,7 +5,6 @@ using Zenkoban.Data;
 
 #if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
-using UnityEditor;
 #endif
 
 namespace Zenkoban.Assets.Levels
