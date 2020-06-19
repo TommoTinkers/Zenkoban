@@ -5,8 +5,8 @@ namespace Zenkoban.Runtime.Levels.Loading
 {
 	public class LevelLoader : ILevelLoader
 	{
-		private static ITileGenerator tileGenerator = null;
-		private static IBlockGenerator blockGenerator = null;
+		private static readonly ITileGenerator tileGenerator = new TileGenerator();
+		private static readonly IBlockGenerator blockGenerator = new BlockGenerator();
 		
 		public Level Load(ILevelAsset levelAsset)
 		{
