@@ -1,8 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Zenkoban.Data;
-
+using Zenkoban.Data.Levels;
 #if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
 #endif
@@ -10,13 +9,17 @@ using Sirenix.Utilities.Editor;
 namespace Zenkoban.Assets.Levels
 {
 	[CreateAssetMenu(fileName = "Level", menuName = "Zenkoban/Create new level.")]
-	public class LevelAsset : SerializedScriptableObject
+	public class LevelAsset : SerializedScriptableObject, ILevelAsset
 	{
 		[SerializeField]
 		[TableMatrix(HorizontalTitle = "Level grid", SquareCells = true, DrawElementMethod = "DrawTileAsset")]
 		private TileType[,] tiles;
 
-		
+		public TileType[,] Tiles => tiles;
+
+		public  LevelSize Size => levelSize;
+
+
 		#region Editor
 		
 		[ShowInInspector]

@@ -710,7 +710,7 @@ namespace Plugins.Editor.JetBrains
     /// <remarks>
     /// Contains all 3 toggles: Enable/Disable; Debug On/Off; Writing Launch File On/Off
     /// </remarks>
-    [PreferenceItem("Rider")]
+    [SettingsProvider]
     static void RiderPreferencesItem()
     {
       EditorGUILayout.BeginVertical();
