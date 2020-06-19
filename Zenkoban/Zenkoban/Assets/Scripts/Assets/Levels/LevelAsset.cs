@@ -17,16 +17,19 @@ namespace Zenkoban.Assets.Levels
 		[TableMatrix(HorizontalTitle = "Level grid", SquareCells = true, DrawElementMethod = "DrawTileAsset")]
 		private TileType[,] tiles;
 
+		
+		#region Editor
+		
 		[ShowInInspector]
 		private static LevelSize levelSize = new LevelSize(); 
-
+		
+		private static TileType current = TileType.Wall;
+		
 		[Button]
 		private void ResizeLevel()
 		{
 			tiles = new TileType[levelSize.Width, levelSize.Height];
 		}
-		
-		private static TileType current = TileType.Wall;
 		
 		private static TileType DrawTileAsset(Rect rect, TileType currentTile)
 		{
@@ -101,5 +104,7 @@ namespace Zenkoban.Assets.Levels
 				current = TileType.Goal;
 			}
 		}
+		
+		#endregion
 	}
 }
