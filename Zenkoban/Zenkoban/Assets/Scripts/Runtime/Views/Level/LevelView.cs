@@ -15,7 +15,7 @@ namespace Zenkoban.Runtime.Views.Level
 		private ILevelLoader levelLoader = null;
 
 		[SerializeField]
-		private ILevelTheme levelTheme;
+		private ILevelTheme levelTheme = null;
 		
 		private Vector3[,] positions;
 		

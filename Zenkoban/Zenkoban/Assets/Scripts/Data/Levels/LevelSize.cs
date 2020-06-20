@@ -7,11 +7,11 @@ namespace Zenkoban.Data.Levels
 	public class LevelSize
 	{
 		[SerializeField]
-		private int width = 32;
+		private int width = 20;
 
 		[SerializeField]
-		private int height = 18;
-
+		private int height = 20;
+		
 		public int Width => width;
 
 		public int Height => height;

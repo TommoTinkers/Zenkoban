@@ -13,26 +13,21 @@ namespace Zenkoban.Assets.Levels
 	{
 		[SerializeField]
 		[TableMatrix(HorizontalTitle = "Level grid", SquareCells = true, DrawElementMethod = "DrawTileAsset")]
-		private TileType[,] tiles;
+		private TileType[,] tiles = new TileType[20,20];
 
 		public TileType[,] Tiles => tiles;
 
-		public  LevelSize Size => levelSize;
+		public LevelSize Size => size;
+
+		private readonly LevelSize size = new LevelSize();
+	
 
 
 		#region Editor
 		
-		[ShowInInspector]
-		private static LevelSize levelSize = new LevelSize(); 
-		
 		private static TileType current = TileType.Wall;
 		
-		[Button]
-		private void ResizeLevel()
-		{
-			tiles = new TileType[levelSize.Width, levelSize.Height];
-		}
-		
+
 		private static TileType DrawTileAsset(Rect rect, TileType currentTile)
 		{
 			if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))

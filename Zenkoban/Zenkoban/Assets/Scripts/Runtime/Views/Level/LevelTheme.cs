@@ -11,20 +11,20 @@ namespace Zenkoban.Runtime.Views.Level
 
 		public GameBlock Block => block;
 
-		public GameObject Tile => tile;
+		public GameObject Floor => floor;
 
 		public GameObject Wall => wall;
 
 		[SerializeField]
-		private GameBlock player;
+		private GameBlock player = null;
 
 		[SerializeField]
-		private GameBlock block;
+		private GameBlock block = null;
 
 		[SerializeField]
-		private GameObject tile;
+		private GameObject floor = null;
 
 		[SerializeField]
-		private GameObject wall;
+		private GameObject wall = null;
 	}
 }
