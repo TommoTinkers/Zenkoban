@@ -3,17 +3,26 @@ using UnityEngine;
 
 namespace Zenkoban.Data.Levels
 {
-	[Serializable]
 	public class LevelSize
 	{
-		[SerializeField]
-		private int width = 20;
-
-		[SerializeField]
-		private int height = 20;
+		
+		private readonly int width = 20;
+		
+		private readonly int height = 20;
 		
 		public int Width => width;
 
 		public int Height => height;
+
+		public LevelSize()
+		{
+		}
+
+		public LevelSize(int w, int h)
+		{
+			width = w;
+			height = h;
+		}
+		
 	}
 }

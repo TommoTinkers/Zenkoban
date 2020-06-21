@@ -1,28 +1,16 @@
-using Sirenix.OdinInspector;
-using UnityEngine;
-using Zenkoban.Assets.Levels;
-using Zenkoban.Runtime.Levels.Loading;
 using Zenkoban.Runtime.Views.Level.Instantiators;
+using Zenkoban.Runtime.Views.Level.Objects;
 
 namespace Zenkoban.Runtime.Views.Level
 {
-	public class LevelView : SerializedMonoBehaviour
+	public class LevelView
 	{
-		[SerializeField]
-		private ILevelAsset levelAsset = null;
+		private GameBlock[,] Blocks => level.Blocks;
+		private readonly InstantiatedLevelView level;
 
-		[SerializeField]
-		private ILevelLoader levelLoader = null;
-
-		[SerializeField]
-		private ILevelTheme levelTheme = null;
-		
-		private Vector3[,] positions;
-		
-		[Button("TestLevelInstantiation")]
-		private void TestLevelInstantiation()
+		public LevelView(InstantiatedLevelView instantiatedLevelView)
 		{
-			LevelInstantiator.InstantiateLevel(levelLoader.Load(levelAsset), levelTheme, transform);	
+			level = instantiatedLevelView;
 		}
 	}
 }

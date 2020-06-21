@@ -19,7 +19,7 @@ namespace Zenkoban.Assets.Levels
 
 		public LevelSize Size => size;
 
-		private readonly LevelSize size = new LevelSize();
+		private LevelSize size => new LevelSize(tiles.GetLength(0), tiles.GetLength(1));
 	
 
 

@@ -7,10 +7,11 @@ namespace Zenkoban.Runtime.Views.Level.Instantiators
 {
 	public static class LevelInstantiator
 	{
-		public static void InstantiateLevel(Data.Levels.Level level, ILevelTheme levelTheme, Transform parent)
+		public static InstantiatedLevelView InstantiateLevel(Data.Levels.Level level, ILevelTheme levelTheme, Transform parent)
 		{
 			var size = level.Size;
 			var positions = PositionGenerator.GeneratePositions(level);
+			var blocks = new GameBlock[size.Width, size.Height];
 			
 			for (var x = 0; x < size.Width; x++)
 			{
@@ -23,17 +24,39 @@ namespace Zenkoban.Runtime.Views.Level.Instantiators
 
 					if (tile.Type == TileType.Floor)
 					{
-						var obj = Object.Instantiate(levelTheme.Floor, position, Quaternion.identity);
-						obj.transform.SetParent(parent, true);
+						var floor = Object.Instantiate(levelTheme.Floor, position, Quaternion.identity);
+						floor.transform.SetParent(parent, true);
 					}
 
-					if (block.Type == BlockType.Wall)
+					if (tile.Type == TileType.Goal)
 					{
-						var obj = Object.Instantiate(levelTheme.Wall, position, Quaternion.identity);
+						var goal = Object.Instantiate(levelTheme.Goal, position, Quaternion.identity);
+						goal.transform.SetParent(parent, true);
+					}
+
+					GameBlock prefab = null;
+					switch(block.Type)
+					{
+						case BlockType.Player:
+							prefab = levelTheme.Player;
+							break;
+						case BlockType.Block:
+							prefab = levelTheme.Block;
+							break;
+						case BlockType.Wall:
+							prefab = levelTheme.Wall;
+							break;
+					}
+					
+					if(prefab != null)
+					{
+						var obj = Object.Instantiate(prefab, position + prefab.Offset, Quaternion.identity);
 						obj.transform.SetParent(parent, true);
 					}
 				}
 			}
+			
+			return new InstantiatedLevelView(size, positions, blocks);
 		}
 	}
 }

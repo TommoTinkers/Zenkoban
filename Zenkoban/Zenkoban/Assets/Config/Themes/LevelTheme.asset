@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  player: {fileID: 0}
-  block: {fileID: 0}
+  player: {fileID: -1403744996928170531, guid: db50785a3abc7cd41bfe6a9a8eada86b, type: 3}
+  block: {fileID: -1403744996928170531, guid: ddffd5694e004124e83800309ac25b11, type: 3}
   floor: {fileID: 8496443402855469934, guid: 1edcb8339191fde40bf30426b6d72421, type: 3}
-  wall: {fileID: 353905877271975001, guid: 5b5c9016618c2264da0f33536c3006b6, type: 3}
+  wall: {fileID: -8190958063786148707, guid: 5b5c9016618c2264da0f33536c3006b6, type: 3}
