@@ -5,7 +5,7 @@ namespace Zenkoban.Runtime.Views.Level.Objects
 {
 	public class GameBlock : MonoBehaviour
 	{
-		public Guid Id { get; private set; }
+		public Guid Id { get; set; }
 
 		public Vector3 Offset => offset;
 

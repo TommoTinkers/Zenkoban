@@ -52,6 +52,8 @@ namespace Zenkoban.Runtime.Views.Level.Instantiators
 					{
 						var obj = Object.Instantiate(prefab, position + prefab.Offset, Quaternion.identity);
 						obj.transform.SetParent(parent, true);
+						obj.Id = block.Id;
+						blocks[x, y] = obj;
 					}
 				}
 			}
