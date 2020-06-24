@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using Zenkoban.Data.Levels;
 using Zenkoban.Runtime.Common;
 using Zenkoban.Runtime.Data.Levels;
 using Zenkoban.Runtime.Data.Movement;
@@ -12,26 +14,37 @@ namespace Zenkoban.Runtime.Logic
 	{
 		public event Action<IEnumerable<MoveNotification>, Action> OnMove;
 		
+		private static readonly Dictionary<MoveDirection, LevelPoint> directionOffsets = new Dictionary<MoveDirection, LevelPoint>
+		{
+			{MoveDirection.Up, new LevelPoint(0, 1)},
+			{MoveDirection.Down, new LevelPoint(0,  - 1)},
+			{MoveDirection.Right, new LevelPoint(1, 0)},
+			{MoveDirection.Left, new LevelPoint(- 1, 0)}
+		};
+		
 		private readonly Level level;
+		private readonly MoveValidator moveValidator;
 		
 		public LevelLogicProcessor(Level level)
 		{
 			this.level = level;
+			moveValidator = new MoveValidator(level, directionOffsets);
 		}
 
-		public void MoveUp()
+		public void Move(MoveDirection direction)
 		{
-			var playerPosition = level.FindPlayer();
+			if (!moveValidator.Validate(level.FindPlayer(), direction)) return;
+			
+			var playerPos = level.FindPlayer();
+			var playerDest = playerPos + directionOffsets[MoveDirection.Up];
 
-			level.Blocks[playerPosition.X, playerPosition.Y + 1] = level.Blocks[playerPosition.X, playerPosition.Y];
-			var id = level.Blocks[playerPosition.X, playerPosition.Y + 1].Id;
-			var notification = new MoveNotification(id, MoveDirection.Up);
-			OnMove?.Invoke(new []{ notification}, HandleMoveComplete);
+			OnMove?.Invoke(new[] {new MoveNotification(level[playerPos].Id, direction),}, HandleMoveComplete);
+			level.Swap(playerPos, playerDest);
 		}
 
 		private void HandleMoveComplete()
 		{
-			Debug.Log("LOGIC: Move complete");
+			Debug.Log("Move complete");
 		}
 	}
 }

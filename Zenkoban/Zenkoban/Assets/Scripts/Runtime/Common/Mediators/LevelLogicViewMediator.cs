@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenkoban.Assets.Levels;
+using Zenkoban.Runtime.Data.Movement;
 using Zenkoban.Runtime.Levels.Loading;
 using Zenkoban.Runtime.Logic;
 using Zenkoban.Runtime.Views.Level;
@@ -34,7 +35,7 @@ namespace Zenkoban.Runtime.Common.Mediators
 		[Button]
 		private void MoveUp()
 		{
-			logicProcessor.MoveUp();
+			logicProcessor.Move(MoveDirection.Up);
 		}
 	}
 }

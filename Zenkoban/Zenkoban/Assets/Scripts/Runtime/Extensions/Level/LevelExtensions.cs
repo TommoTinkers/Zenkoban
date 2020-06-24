@@ -18,5 +18,7 @@ namespace Zenkoban.Runtime.Extensions.Level
 			
 			return new LevelPoint(x, y);
 		}
+		
+		public static bool IsWall(this Data.Levels.Level level, LevelPoint point) => level[point].Type == BlockType.Wall;
 	}
 }

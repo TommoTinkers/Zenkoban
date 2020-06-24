@@ -53,5 +53,18 @@ namespace Zenkoban.Runtime.Data.Levels
 				throw new Exception($"Size of level is not valid. Expected: {Size.Area()}. Blocks: {Blocks.Length}. Tiles: {Tiles.Length}");
 			}
 		}
+
+		public Block this[LevelPoint p]
+		{
+			get => Blocks[p.X, p.Y];
+			set => Blocks[p.X, p.Y] = value;
+		}
+
+		public void Swap(LevelPoint a, LevelPoint b)
+		{
+			var temp = this[a];
+			this[a] = this[b];
+			this[b] = temp;
+		}
 	}
 }

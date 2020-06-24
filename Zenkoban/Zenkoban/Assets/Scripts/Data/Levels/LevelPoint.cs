@@ -10,5 +10,11 @@ namespace Zenkoban.Data.Levels
 			X = x;
 			Y = y;
 		}
+
+		public static LevelPoint operator+(LevelPoint left, LevelPoint right)
+		{
+			return new LevelPoint(left.X + right.X, left.Y + right.Y);
+		}
+		
 	}
 }
