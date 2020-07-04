@@ -10,31 +10,28 @@ namespace Zenkoban.Runtime.Logic
 	public class MoveValidator
 	{
 		private readonly Level level;
-		private readonly IReadOnlyDictionary<MoveDirection, LevelPoint> offsets;
-
+		
 		private readonly List<IPlayerMoveValidatorRule> PlayerMoveValidatorRules = new List<IPlayerMoveValidatorRule>
 		{
-			new PlayerWallRule()
+			new PlayerWallRule(),
+			new PlayerBlockRule()
 		};
 		
-		public MoveValidator(Level level, IReadOnlyDictionary<MoveDirection, LevelPoint> offsets)
+		public MoveValidator(Level level)
 		{
 			this.level = level;
-			this.offsets = offsets;
 		}
 
 		public bool Validate(LevelPoint playerPos, MoveDirection direction)
 		{
-			var playerDest = playerPos + offsets[direction];
+			var playerDest = playerPos + direction;
 			
-			if (PlayerMoveValidatorRules.Any(r => r.Validate(level, playerDest) == false))
+			if (PlayerMoveValidatorRules.Any(r => r.Validate(level, playerDest, direction) == false))
 			{
 				return false;
 			}
 
 			return true;
 		}
-		
-		
 	}
 }

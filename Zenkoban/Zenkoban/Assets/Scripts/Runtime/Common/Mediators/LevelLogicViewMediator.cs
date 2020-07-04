@@ -37,5 +37,29 @@ namespace Zenkoban.Runtime.Common.Mediators
 		{
 			logicProcessor.Move(MoveDirection.Up);
 		}
+		
+		[Button]
+		private void MoveDown()
+		{
+			logicProcessor.Move(MoveDirection.Down);
+		}
+		
+		[Button]
+		private void MoveLeft()
+		{
+			logicProcessor.Move(MoveDirection.Left);
+		}
+
+		[Button]
+		private void MoveRight()
+		{
+			logicProcessor.Move(MoveDirection.Right);
+		}
+
+		[Button]
+		private void Undo()
+		{
+			logicProcessor.Undo();
+		}
 	}
 }
