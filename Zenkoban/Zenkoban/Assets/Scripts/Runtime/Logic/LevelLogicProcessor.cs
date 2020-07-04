@@ -35,9 +35,15 @@ namespace Zenkoban.Runtime.Logic
 			var playerPos = level.FindPlayer();
 			var playerDest = playerPos + direction;
 			
-			var funcPair = GenerateMovePair(playerPos, playerDest, direction);
+			var playerMove = GenerateMovePair(playerPos, playerDest, direction);
+			var blockMove = GenerateMovePair(playerDest, playerDest + direction, direction);
+
+			if (level[playerDest].Type == BlockType.Block)
+			{
+				moveFunctions.Add(blockMove);
+			}
 			
-			moveFunctions.Add(funcPair);
+			moveFunctions.Add(playerMove);
 
 			(var forward, var undo) = CreateDispatchPair(moveFunctions);
 			
@@ -78,7 +84,7 @@ namespace Zenkoban.Runtime.Logic
 		private (Action, Action) CreateDispatchPair(IEnumerable<(Func<MoveNotification>, Func<MoveNotification>)> movePairs)
 		{
 			var forwardMoves = movePairs.Select(m => m.Item1);
-			var undoMoves = movePairs.Select(m => m.Item2);
+			var undoMoves = movePairs.Select(m => m.Item2).Reverse();
 
 			Action forward = () => DispatchMove(forwardMoves);
 			Action undo = () => DispatchMove(undoMoves);
