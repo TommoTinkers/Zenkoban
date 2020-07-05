@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Zenkoban.Data.Levels;
 using Zenkoban.Runtime.Common;
 using Zenkoban.Runtime.Data.Levels;
 using Zenkoban.Runtime.Data.Movement;
-using Zenkoban.Runtime.Extensions;
 using Zenkoban.Runtime.Extensions.Level;
 
 namespace Zenkoban.Runtime.Logic
@@ -29,23 +27,21 @@ namespace Zenkoban.Runtime.Logic
 		public void Move(MoveDirection direction)
 		{
 			if (!moveValidator.Validate(level.FindPlayer(), direction)) return;
-
-			var moveFunctions = new List<(Func<MoveNotification>, Func<MoveNotification>)>();
+			
+			var sequencer = new MoveSequencer(level);
 			
 			var playerPos = level.FindPlayer();
 			var playerDest = playerPos + direction;
 			
-			var playerMove = GenerateMovePair(playerPos, playerDest, direction);
-			var blockMove = GenerateMovePair(playerDest, playerDest + direction, direction);
-
+			
 			if (level[playerDest].Type == BlockType.Block)
 			{
-				moveFunctions.Add(blockMove);
+				sequencer.SequenceMove(playerDest, playerDest + direction, direction);
 			}
 			
-			moveFunctions.Add(playerMove);
+			sequencer.SequenceMove(playerPos, playerDest, direction);
 
-			(var forward, var undo) = CreateDispatchPair(moveFunctions);
+			(var forward, var undo) = sequencer.CreateDispatchPair(NotifiyOnMove);
 			
 			undoStack.Push(undo);
 			forward();
@@ -63,38 +59,9 @@ namespace Zenkoban.Runtime.Logic
 		{
 			Debug.Log("Move complete");
 		}
-
-		private (Func<MoveNotification>, Func<MoveNotification>) GenerateMovePair(LevelPoint from, LevelPoint to, MoveDirection direction)
-		{
-			var doFunc = GenerateMoveFunction(from, to, direction);
-			var undoFunc = GenerateMoveFunction(to, from, direction.Invert());
-			return (doFunc, undoFunc);
-		}
 		
-		private Func<MoveNotification> GenerateMoveFunction(LevelPoint from, LevelPoint to, MoveDirection direction)
+		private void NotifiyOnMove(IEnumerable<MoveNotification> notifications)
 		{
-			return () =>
-			{
-				var notification = new MoveNotification(level[from].Id, direction);
-				level.Swap(from, to);
-				return notification;
-			};
-		}
-
-		private (Action, Action) CreateDispatchPair(IEnumerable<(Func<MoveNotification>, Func<MoveNotification>)> movePairs)
-		{
-			var forwardMoves = movePairs.Select(m => m.Item1);
-			var undoMoves = movePairs.Select(m => m.Item2).Reverse();
-
-			Action forward = () => DispatchMove(forwardMoves);
-			Action undo = () => DispatchMove(undoMoves);
-
-			return (forward, undo);
-		}
-		
-		private void DispatchMove(IEnumerable<Func<MoveNotification>> moves)
-		{
-			var notifications = moves.Select(m => m.Invoke());
 			OnMove?.Invoke(notifications, HandleMoveComplete);
 		}
 	}
