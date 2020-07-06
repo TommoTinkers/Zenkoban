@@ -60,8 +60,30 @@
                 },
                 {
                     "name": "",
+                    "id": "03c9eaf1-ec07-4742-9b06-b28a5dded87b",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "cb775299-2e98-4d73-9222-21b4fa56e155",
                     "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "268e095f-e5a0-46ee-b113-91e160ec3499",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -82,6 +104,17 @@
                 },
                 {
                     "name": "",
+                    "id": "4460292f-c530-4412-aab4-2dddecc9a055",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1f64cdb0-21e1-427a-9421-4ebadeff5587",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -93,8 +126,30 @@
                 },
                 {
                     "name": "",
+                    "id": "d7c8cc37-7399-45d6-8038-208d5d9580b6",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c6dc0d4d-a12d-4d1f-b644-a7a59bd13a99",
                     "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Undo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7beef8b-1985-4cee-9b2f-f6078066d98d",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
