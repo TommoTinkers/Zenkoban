@@ -20,5 +20,23 @@ namespace Zenkoban.Runtime.Extensions.Level
 		}
 		
 		public static bool IsWall(this Data.Levels.Level level, LevelPoint point) => level[point].Type == BlockType.Wall;
+
+		public static int OpenGoalSquares(this Data.Levels.Level level)
+		{
+			var count = 0;
+			for (var x = 0; x < level.Size.Width; x++)
+			{
+				for (var y = 0; y < level.Size.Height; y++)
+				{
+					if (level.Tiles[x, y].Type != TileType.Goal) continue;
+					if (level.Blocks[x, y].Type != BlockType.Block)
+					{
+						count++;
+					}
+				}
+			}
+
+			return count;
+		}
 	}
 }

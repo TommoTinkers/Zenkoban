@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Zenkoban.Runtime.Common;
 using Zenkoban.Runtime.Data.Levels;
 using Zenkoban.Runtime.Data.Movement;
@@ -36,7 +35,6 @@ namespace Zenkoban.Runtime.Logic
 			var playerPos = level.FindPlayer();
 			var playerDest = playerPos + direction;
 			
-			
 			if (level[playerDest].Type == BlockType.Block)
 			{
 				sequencer.SequenceMove(playerDest, playerDest + direction, direction);
@@ -62,7 +60,10 @@ namespace Zenkoban.Runtime.Logic
 		
 		private void HandleMoveComplete()
 		{
-			isMoving = false;
+			if (level.OpenGoalSquares() > 0)
+			{
+				isMoving = false;
+			}
 		}
 		
 		private void NotifiyOnMove(IEnumerable<MoveNotification> notifications)
