@@ -13,6 +13,7 @@ namespace Zenkoban.Runtime.Logic
 		private bool isMoving = false;
 		
 		public event Action<IEnumerable<MoveNotification>, Action> OnMove;
+		public event Action OnLevelComplete;
 		
 		private readonly Level level;
 		private readonly MoveValidator moveValidator;
@@ -63,6 +64,10 @@ namespace Zenkoban.Runtime.Logic
 			if (level.OpenGoalSquares() > 0)
 			{
 				isMoving = false;
+			}
+			else
+			{
+				OnLevelComplete?.Invoke();
 			}
 		}
 		
