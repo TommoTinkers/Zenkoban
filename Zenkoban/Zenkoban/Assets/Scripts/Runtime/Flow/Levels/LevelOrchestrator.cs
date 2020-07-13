@@ -2,7 +2,6 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenkoban.Assets.Levels;
 using Zenkoban.Runtime.Common.Mediators;
-using Zenkoban.Runtime.Levels.Loading;
 
 namespace Zenkoban.Runtime.Flow.Levels
 {

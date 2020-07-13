@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 564424667999223470}
   - component: {fileID: 1274321250772656815}
   - component: {fileID: -1403744996928170531}
+  - component: {fileID: -292189497263343345}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -106,3 +107,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149dd8ed039e404e820ed3936306c166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 5, z: 0}
+--- !u!114 &-292189497263343345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353905877271975001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc02511171c44f383c1861932234b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  albedo: {r: 1, g: 0.95496166, b: 0, a: 1}
+  emissive: {r: 0.61226803, g: 0.6603774, b: 0.22739404, a: 0.4745098}

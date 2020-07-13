@@ -5,18 +5,23 @@ using Zenkoban.Runtime.Common;
 using Zenkoban.Runtime.Data.Movement;
 using Zenkoban.Runtime.Views.Level.Instantiators;
 using Zenkoban.Runtime.Views.Level.Movement;
+using Zenkoban.Runtime.Views.Level.PostMove;
 using Zenkoban.Settings;
-
 
 namespace Zenkoban.Runtime.Views.Level
 {
 	public class LevelView
 	{
 		private readonly InstantiatedLevelView level;
+		private readonly Data.Levels.Level levelData;
 
-		public LevelView(InstantiatedLevelView instantiatedLevelView, IMoveCommandProvider moveCommandProvider)
+		private readonly PostMoveLevelView postMoveLevelView;
+		
+		public LevelView(InstantiatedLevelView instantiatedLevelView, IMoveCommandProvider moveCommandProvider, Data.Levels.Level levelData)
 		{
 			level = instantiatedLevelView;
+			postMoveLevelView = new PostMoveLevelView();
+			this.levelData = levelData;
 			moveCommandProvider.OnMove += HandleMove;
 		}
 
@@ -35,7 +40,7 @@ namespace Zenkoban.Runtime.Views.Level
 
 		private void OnMoveEnded(Action callback)
 		{
-			callback?.Invoke();
+			postMoveLevelView.Process(levelData, callback, level);
 		}
 
 		private Vector3 GetMoveToPosition(Vector3 current, MoveDirection direction)

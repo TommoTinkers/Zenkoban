@@ -25,7 +25,7 @@ namespace Zenkoban.Runtime.Common.Mediators
 			logicProcessor = new LevelLogicProcessor(level);
 			var instantiatedLevelViewFactory = new InstantiatedLevelViewFactory(levelTheme, transform);
 			var viewData = instantiatedLevelViewFactory.Construct(level);
-			new LevelView(viewData, logicProcessor);
+			new LevelView(viewData, logicProcessor, level);
 		}
 
 		public void Begin(Action onCompleteCallback)

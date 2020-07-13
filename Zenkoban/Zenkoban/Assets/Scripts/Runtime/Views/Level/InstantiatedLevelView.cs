@@ -4,7 +4,7 @@ using UnityEngine;
 using Zenkoban.Data.Levels;
 using Zenkoban.Runtime.Views.Level.Objects;
 
-namespace Zenkoban.Runtime.Views.Level.Instantiators
+namespace Zenkoban.Runtime.Views.Level
 {
 	public class InstantiatedLevelView
 	{
