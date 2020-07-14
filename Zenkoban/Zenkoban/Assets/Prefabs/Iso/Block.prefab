@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1274321250772656815}
   - component: {fileID: -1403744996928170531}
   - component: {fileID: -292189497263343345}
+  - component: {fileID: -2842627222835564102}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -131,3 +132,45 @@ MonoBehaviour:
     SerializationNodes: []
   albedo: {r: 1, g: 0.95496166, b: 0, a: 1}
   emissive: {r: 0.61226803, g: 0.6603774, b: 0.22739404, a: 0.4745098}
+  celebrationAlbedo: {r: 0.08141923, g: 1, b: 0, a: 1}
+  celebrationEmissive: {r: 0.005943987, g: 0.56765074, b: 0, a: 0.48235294}
+--- !u!114 &-2842627222835564102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353905877271975001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 35895739625d49f41917aaa43af50f89, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -292189497263343345}
+          m_MethodName: ColorToOffGoal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 353905877271975001}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

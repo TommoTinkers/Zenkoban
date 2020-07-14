@@ -1,6 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Playables;
 using Zenkoban.Input.Movement;
 using Zenkoban.Runtime.Data.Levels;
 using Zenkoban.Runtime.Data.Movement;
@@ -17,6 +18,9 @@ namespace Zenkoban.Runtime.Common.Mediators
 
 		[SerializeField]
 		private IMovementInputProvider movementInputProvider = null;
+
+		[SerializeField]
+		private PlayableDirector endOfLevelTimeline = null;
 		
 		private LevelLogicProcessor logicProcessor;
 		
@@ -35,7 +39,9 @@ namespace Zenkoban.Runtime.Common.Mediators
 			movementInputProvider.OnMoveLeft += MoveLeft;
 			movementInputProvider.OnMoveRight += MoveRight;
 			movementInputProvider.OnUndo += Undo;
-			logicProcessor.OnLevelComplete += onCompleteCallback;
+
+			endOfLevelTimeline.stopped += d => onCompleteCallback();
+			logicProcessor.OnLevelComplete += endOfLevelTimeline.Play;
 		}
 		
 		private void MoveUp()

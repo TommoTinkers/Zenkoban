@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 5351508770114025292}
   - component: {fileID: 5351508770114025267}
   - component: {fileID: 5351508770114025293}
+  - component: {fileID: 565498082}
+  - component: {fileID: 1586151658}
+  - component: {fileID: 1586151659}
   m_Layer: 0
   m_Name: LevelContext
   m_TagString: Untagged
@@ -48,7 +51,6 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 959f4610172851040ab02a8373a36ab2, type: 2}
     - {fileID: 11400000, guid: 73f8e386f28f7384ca2f0eaf2aa7de73, type: 2}
     - {fileID: 5351508770114025293}
     SerializedBytesString: 
@@ -56,21 +58,13 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: levelAsset
-      Entry: 10
-      Data: 0
-    - Name: levelLoader
-      Entry: 7
-      Data: 0|Zenkoban.Runtime.Levels.Loading.LevelLoader, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: levelTheme
       Entry: 10
-      Data: 1
+      Data: 0
     - Name: movementInputProvider
       Entry: 10
-      Data: 2
+      Data: 1
+  endOfLevelTimeline: {fileID: 565498082}
 --- !u!114 &5351508770114025293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,5 +75,65 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7243610e5154440bb5885c876bac361a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!320 &565498082
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351508770114025266}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: a7b52aa8d66b0bb46b7158a59b531e49, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 4360667837787333811, guid: a7b52aa8d66b0bb46b7158a59b531e49, type: 2}
+    value: {fileID: 5351508770114025266}
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &1586151658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351508770114025266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 35895739625d49f41917aaa43af50f89, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1586151659}
+          m_MethodName: TurnBlocksGreen
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1586151659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351508770114025266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a99b67076d4567a49af182e6aa6f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

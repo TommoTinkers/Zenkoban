@@ -13,6 +13,14 @@ namespace Zenkoban.Runtime.Views.Level.Objects
 		[ColorUsage(true, true)]
 		private Color emissive = Color.cyan;
 
+		[SerializeField]
+		private Color celebrationAlbedo = Color.cyan;
+
+		[SerializeField]
+		[ColorUsage(true, true)]
+		private Color celebrationEmissive = Color.cyan;
+		
+		
 		private Material material;
 
 		private Color albedoDefault;
@@ -38,6 +46,12 @@ namespace Zenkoban.Runtime.Views.Level.Objects
 		{
 			material.DOColor(albedoDefault, 0.2f).Play();
 			material.DOColor(emissiveDefault, "_EmissionColor", 0.2f).Play();
+		}
+
+		public void ColorToCelebration()
+		{
+			material.DOColor(celebrationAlbedo, 0.2f).Play();
+			material.DOColor(celebrationEmissive, "_EmissionColor", 0.2f).Play();
 		}
 	}
 }
