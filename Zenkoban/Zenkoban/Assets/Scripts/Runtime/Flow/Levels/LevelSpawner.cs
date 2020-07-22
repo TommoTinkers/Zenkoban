@@ -5,6 +5,7 @@ using UnityEngine;
 using Zenkoban.Assets.Levels;
 using Zenkoban.Runtime.Common.Mediators;
 using Zenkoban.Runtime.Levels.Loading;
+using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.Flow.Levels
 {
@@ -27,7 +28,7 @@ namespace Zenkoban.Runtime.Flow.Levels
 			var context = Instantiate(levelContextPrefab);
 			context.Initialise(levelLoader.Load(levelAsset));
 			context.transform.position = spawnPoint.position;
-			var anim = context.transform.DOMove(Vector3.zero, 0.5f);
+			var anim = context.transform.DOMove(Vector3.zero, GameSettings.LevelSpawnTime);
 			anim.onComplete += () => onLevelReady.Invoke(context);
 			anim.Play();
 
@@ -36,7 +37,8 @@ namespace Zenkoban.Runtime.Flow.Levels
 
 		public void DeSpawnLevel(LevelLogicViewMediator context, Action onLevelDespawned)
 		{
-			var anim = context.transform.DOMove(despawnPoint.position, 0.5f);
+			var anim = context.transform.DOMove(despawnPoint.position, GameSettings.LevelDespawnTime);
+			anim.onComplete += () => Destroy(context.gameObject);
 			anim.onComplete += () => onLevelDespawned();
 			anim.Play();
 		}

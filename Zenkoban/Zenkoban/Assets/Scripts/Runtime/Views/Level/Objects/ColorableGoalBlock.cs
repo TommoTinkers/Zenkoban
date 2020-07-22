@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.Views.Level.Objects
 {
@@ -37,21 +38,20 @@ namespace Zenkoban.Runtime.Views.Level.Objects
 		
 		public void ColorToOnGoal()
 		{
-		
 			material.DOColor(albedo, 0.2f).Play();
-			material.DOColor(emissive, "_EmissionColor", 0.2f).Play();
+			material.DOColor(emissive, "_EmissionColor", GameSettings.BlockGoalColorChangeDuration).Play();
 		}
 
 		public void ColorToOffGoal()
 		{
 			material.DOColor(albedoDefault, 0.2f).Play();
-			material.DOColor(emissiveDefault, "_EmissionColor", 0.2f).Play();
+			material.DOColor(emissiveDefault, "_EmissionColor", GameSettings.BlockGoalColorChangeDuration).Play();
 		}
 
 		public void ColorToCelebration()
 		{
 			material.DOColor(celebrationAlbedo, 0.2f).Play();
-			material.DOColor(celebrationEmissive, "_EmissionColor", 0.2f).Play();
+			material.DOColor(celebrationEmissive, "_EmissionColor", GameSettings.BlockGoalColorChangeDuration).Play();
 		}
 	}
 }

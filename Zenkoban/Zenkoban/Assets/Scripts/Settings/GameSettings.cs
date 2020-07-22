@@ -2,7 +2,16 @@
 {
 	public static class GameSettings
 	{
-		public static readonly int TileSize = 10;
-		public static float BlockMoveDuration => 0.2f;
+		public const int TileSize = 10;
+		public const float BlockMoveDuration = 0.2f;
+
+		public const float LevelSpawnTime = 0.5f;
+		public const float LevelDespawnTime = LevelSpawnTime;
+
+		public const float BlockGoalColorChangeDuration = 0.2f;
+
+		public const float BlockJumpDuration = 2f;
+		public const int BlockJumpCount = 5;
+		public const float BlockJumpPower = 16f;
 	}
 }

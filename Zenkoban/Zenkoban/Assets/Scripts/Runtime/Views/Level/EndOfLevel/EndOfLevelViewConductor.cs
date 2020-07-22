@@ -2,6 +2,7 @@ using DG.Tweening;
 using Sirenix.Utilities;
 using UnityEngine;
 using Zenkoban.Runtime.Views.Level.Objects;
+using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.Views.Level.EndOfLevel
 {
@@ -18,7 +19,7 @@ namespace Zenkoban.Runtime.Views.Level.EndOfLevel
 			var objects = FindObjectsOfType<ColorableGoalBlock>();
 			objects.ForEach(o =>
 			{
-				var clip = o.transform.DOLocalJump(o.transform.position, 16f, 5, 2);
+				var clip = o.transform.DOLocalJump(o.transform.position, GameSettings.BlockJumpPower, GameSettings.BlockJumpCount, GameSettings.BlockJumpDuration);
 				clip.SetEase(Ease.Linear);
 				clip.Play();
 			});
