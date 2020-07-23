@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenkoban.Runtime.Common;
 using Zenkoban.Runtime.Data.Movement;
-using Zenkoban.Runtime.Views.Level.Instantiators;
+using Zenkoban.Runtime.Events;
+using Zenkoban.Runtime.Events.InGameEvents;
 using Zenkoban.Runtime.Views.Level.Movement;
 using Zenkoban.Runtime.Views.Level.PostMove;
 using Zenkoban.Settings;
@@ -14,14 +15,16 @@ namespace Zenkoban.Runtime.Views.Level
 	{
 		private readonly InstantiatedLevelView level;
 		private readonly Data.Levels.Level levelData;
+		private readonly IEventDispatcher<InGameEvent> eventDispatcher;
 
 		private readonly PostMoveLevelView postMoveLevelView;
 		
-		public LevelView(InstantiatedLevelView instantiatedLevelView, IMoveCommandProvider moveCommandProvider, Data.Levels.Level levelData)
+		public LevelView(InstantiatedLevelView instantiatedLevelView, IMoveCommandProvider moveCommandProvider, Data.Levels.Level levelData, IEventDispatcher<InGameEvent> eventDispatcher)
 		{
 			level = instantiatedLevelView;
 			postMoveLevelView = new PostMoveLevelView();
 			this.levelData = levelData;
+			this.eventDispatcher = eventDispatcher;
 			moveCommandProvider.OnMove += HandleMove;
 		}
 
@@ -33,6 +36,7 @@ namespace Zenkoban.Runtime.Views.Level
 			{
 				var block = level.Blocks[move.Id];
 				mover.Move(block.gameObject,GetMoveToPosition(block.transform.position, move.Direction));
+				eventDispatcher.Publish(InGameEvent.PlayerMoved);
 			}
 			
 			mover.Action().Start(() => OnMoveEnded(onCompleteCallback));

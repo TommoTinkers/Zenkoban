@@ -5,6 +5,7 @@ using UnityEngine.Playables;
 using Zenkoban.Input.Movement;
 using Zenkoban.Runtime.Data.Levels;
 using Zenkoban.Runtime.Data.Movement;
+using Zenkoban.Runtime.Events.InGameEvents;
 using Zenkoban.Runtime.Logic;
 using Zenkoban.Runtime.Views.Level;
 using Zenkoban.Runtime.Views.Level.Factories;
@@ -29,7 +30,7 @@ namespace Zenkoban.Runtime.Common.Mediators
 			logicProcessor = new LevelLogicProcessor(level);
 			var instantiatedLevelViewFactory = new InstantiatedLevelViewFactory(levelTheme, transform);
 			var viewData = instantiatedLevelViewFactory.Construct(level);
-			new LevelView(viewData, logicProcessor, level);
+			new LevelView(viewData, logicProcessor, level, FindObjectOfType<InGameEventSystem>());
 		}
 
 		public void Begin(Action onCompleteCallback)
