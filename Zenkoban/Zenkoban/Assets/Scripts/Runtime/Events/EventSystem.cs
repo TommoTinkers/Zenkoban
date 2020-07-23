@@ -4,22 +4,26 @@ using UnityEngine;
 
 namespace Zenkoban.Runtime.Events
 {
-	public class EventSystem<TEvent> : MonoBehaviour, IEventDispatcher<TEvent> where TEvent : System.Enum
+	public class EventSystem<TEvent> : MonoBehaviour, IEventDispatcher<TEvent>, IEventPublisher<TEvent> where TEvent : System.Enum
 	{
-		private readonly Dictionary<TEvent, List<Action>> _listeners = new Dictionary<TEvent, List<Action>>();
+		private readonly Dictionary<TEvent, List<Action>> listeners = new Dictionary<TEvent, List<Action>>();
 
+		public event Action<TEvent> OnEventPublished;
+			
 		public void AddListener(TEvent eventType, Action action)
 		{
 			EnsureEventTypeIsInDictionary(eventType);
 			
-			_listeners[eventType].Add(action);
+			listeners[eventType].Add(action);
 		}
 
 		public void Publish(TEvent eventType)
 		{
 			EnsureEventTypeIsInDictionary(eventType);
 			
-			_listeners[eventType].ForEach(Dispatch);
+			listeners[eventType].ForEach(Dispatch);
+			
+			OnEventPublished?.Invoke(eventType);
 		}
 
 		private static void Dispatch(Action eventListener)
@@ -29,9 +33,9 @@ namespace Zenkoban.Runtime.Events
 
 		private void EnsureEventTypeIsInDictionary(TEvent eventType)
 		{
-			if (!_listeners.ContainsKey(eventType))
+			if (!listeners.ContainsKey(eventType))
 			{
-				_listeners[eventType] = new List<Action>();
+				listeners[eventType] = new List<Action>();
 			}
 		}
 	}
