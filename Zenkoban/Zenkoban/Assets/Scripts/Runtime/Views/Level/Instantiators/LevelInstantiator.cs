@@ -24,7 +24,8 @@ namespace Zenkoban.Runtime.Views.Level.Instantiators
 
 					if (tile.Type == TileType.Floor)
 					{
-						var floor = Object.Instantiate(levelTheme.Floor, position, Quaternion.identity);
+						var floorPrefab = levelTheme.Floor[(x + y) % 2];
+						var floor = Object.Instantiate(floorPrefab, position, Quaternion.identity);
 						floor.transform.SetParent(parent, true);
 					}
 

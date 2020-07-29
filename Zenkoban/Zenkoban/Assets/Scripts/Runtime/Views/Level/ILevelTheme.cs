@@ -7,7 +7,7 @@ namespace Zenkoban.Runtime.Views.Level
 	{
 		GameBlock Player { get; }
 		GameBlock Block { get; }
-		GameObject Floor { get; }
+		GameObject[] Floor { get; }
 		GameBlock Wall { get; }
 		GameObject Goal { get; }
 	}
