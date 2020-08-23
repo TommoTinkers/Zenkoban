@@ -23,7 +23,7 @@ namespace Zenkoban.Runtime.UI.LevelSelect
 			var panels = levelSet.Select(set => Instantiate(panelPrefab).gameObject).ToArray();
 			var carouselMenu = carouelMenuBuilder.Build(panels);
 			carouselMenu.transform.position = Vector3.down * 25f;
-			carouselMenu.transform.DOJump(Vector3.zero, 2f, 3, 1f).Play();
+			carouselMenu.transform.DOJump(Vector3.down, 2f, 3, 1f).Play();
 
 		}
 	}

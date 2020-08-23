@@ -85,7 +85,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			var numberOfPanelsToScroll = selectedIndex - index;
 
 			var newContainerPosition = panelContainer.position + Vector3.right * (numberOfPanelsToScroll * panelSpacing);
-			var anim = panelContainer.DOLocalMove(newContainerPosition, totalDuration);
+			var anim = panelContainer.DOMove(newContainerPosition, totalDuration);
 			anim.onComplete += () =>
 			{
 				selectedIndex = index;
