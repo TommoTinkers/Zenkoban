@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelContainer: {fileID: 560880714445951356}
-  panelSpacing: 8.5
-  nonFocusScale: 0.6
+  panelSpacing: 3
+  nonFocusScale: 0.7
 --- !u!1 &560880714445951359
 GameObject:
   m_ObjectHideFlags: 0
