@@ -13,5 +13,6 @@
 		public const float BlockJumpDuration = 2f;
 		public const int BlockJumpCount = 5;
 		public const float BlockJumpPower = 16f;
+		public const float CarouselDuration = 0.25f;
 	}
 }

@@ -7,8 +7,11 @@ namespace Zenkoban.Runtime.UI.Carousel
 	public class LevelSetCarouselPanel : MonoBehaviour
 	{
 		[SerializeField]
+		private Canvas canvas = null;
+
+		[SerializeField]
 		private Image levelSetThumbnail;
-		
+
 		[SerializeField]
 		private TMP_Text levelSetTitle;
 
@@ -17,5 +20,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 		[SerializeField]
 		private TMP_Text starsCount;
+
+		public Canvas Canvas => canvas;
 	}
 }
