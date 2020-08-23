@@ -8,7 +8,6 @@ using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.UI.Carousel
 {
-	
 	public class CarouselMenu : MonoBehaviour
 	{
 		[SerializeField]
@@ -76,8 +75,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 		[Button("CycleRight")]
 		public void CycleRight() => CycleTo(selectedIndex + 1, GameSettings.CarouselDuration);
-
-
+		
 		[Button("CycleLeft")]
 		public void CycleLeft() => CycleTo(selectedIndex - 1, GameSettings.CarouselDuration);
 
