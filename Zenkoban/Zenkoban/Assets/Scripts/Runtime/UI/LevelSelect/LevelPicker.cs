@@ -12,7 +12,8 @@ namespace Zenkoban.Runtime.UI.LevelSelect
 	public class LevelPicker : SerializedMonoBehaviour
 	{
 		public event Action<LevelAsset> OnLevelPicked;
-
+		public event Action OnBackSelected;
+		
 		[SerializeField] 
 		private LevelCarouselPanel panelPrefab = null;
 
@@ -29,6 +30,7 @@ namespace Zenkoban.Runtime.UI.LevelSelect
 				HandleItemSelected(levelSet, i);
 			};
 			carouselMenu.OnItemSelected += handleItemSelectedCallback;
+			carouselMenu.OnUserChoseBack += () => OnBackSelected?.Invoke();
 			return carouselMenu.transform;
 		}
 

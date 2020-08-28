@@ -14,6 +14,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 	public class CarouselMenu : MonoBehaviour
 	{
 		public event Action<ICarouselPanel, int> OnItemSelected;
+		public event Action OnUserChoseBack;
 		
 		[SerializeField]
 		private Transform panelContainer = null;
@@ -34,6 +35,12 @@ namespace Zenkoban.Runtime.UI.Carousel
 			inputProvider.OnCycleLeft += CycleLeft;
 			inputProvider.OnCycleRight += CycleRight;
 			inputProvider.OnSelect += HandleSelection;
+			inputProvider.OnBack += HandleUserGoingBack;
+		}
+
+		private void HandleUserGoingBack()
+		{
+			OnUserChoseBack?.Invoke();
 		}
 
 		private void HandleSelection()
