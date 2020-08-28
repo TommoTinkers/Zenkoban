@@ -171,6 +171,112 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Carousel"",
+            ""id"": ""7f024c6b-7822-46bc-a680-4de523ff69d9"",
+            ""actions"": [
+                {
+                    ""name"": ""CycleLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9d8092b-e5d4-4bea-9c7c-0ec44593a038"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CycleRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""2bcf6159-33bb-4133-a10c-53e26dc8c79f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""fbbb9707-70e0-400a-8b39-47ee1d0a1e7d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""71707eb0-91bb-4fd1-9fd3-29d404f101e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""16262a64-b725-4227-86c6-07720fac3eb2"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d44a43ba-db00-455e-a3d1-3e1dae6fa640"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""544348e4-e022-45a7-b86c-1cc79292505c"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca709d7a-5b71-44b5-9bbe-d63655823f13"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39eae3c0-8e9c-4c06-b503-3812a2f7dc16"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e8e496c-978c-4835-85cc-b66185877705"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -182,6 +288,12 @@ public class @Controls : IInputActionCollection, IDisposable
         m_InGame_MoveLeft = m_InGame.FindAction("MoveLeft", throwIfNotFound: true);
         m_InGame_MoveRight = m_InGame.FindAction("MoveRight", throwIfNotFound: true);
         m_InGame_Undo = m_InGame.FindAction("Undo", throwIfNotFound: true);
+        // Carousel
+        m_Carousel = asset.FindActionMap("Carousel", throwIfNotFound: true);
+        m_Carousel_CycleLeft = m_Carousel.FindAction("CycleLeft", throwIfNotFound: true);
+        m_Carousel_CycleRight = m_Carousel.FindAction("CycleRight", throwIfNotFound: true);
+        m_Carousel_Select = m_Carousel.FindAction("Select", throwIfNotFound: true);
+        m_Carousel_Back = m_Carousel.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -292,6 +404,63 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public InGameActions @InGame => new InGameActions(this);
+
+    // Carousel
+    private readonly InputActionMap m_Carousel;
+    private ICarouselActions m_CarouselActionsCallbackInterface;
+    private readonly InputAction m_Carousel_CycleLeft;
+    private readonly InputAction m_Carousel_CycleRight;
+    private readonly InputAction m_Carousel_Select;
+    private readonly InputAction m_Carousel_Back;
+    public struct CarouselActions
+    {
+        private @Controls m_Wrapper;
+        public CarouselActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CycleLeft => m_Wrapper.m_Carousel_CycleLeft;
+        public InputAction @CycleRight => m_Wrapper.m_Carousel_CycleRight;
+        public InputAction @Select => m_Wrapper.m_Carousel_Select;
+        public InputAction @Back => m_Wrapper.m_Carousel_Back;
+        public InputActionMap Get() { return m_Wrapper.m_Carousel; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CarouselActions set) { return set.Get(); }
+        public void SetCallbacks(ICarouselActions instance)
+        {
+            if (m_Wrapper.m_CarouselActionsCallbackInterface != null)
+            {
+                @CycleLeft.started -= m_Wrapper.m_CarouselActionsCallbackInterface.OnCycleLeft;
+                @CycleLeft.performed -= m_Wrapper.m_CarouselActionsCallbackInterface.OnCycleLeft;
+                @CycleLeft.canceled -= m_Wrapper.m_CarouselActionsCallbackInterface.OnCycleLeft;
+                @CycleRight.started -= m_Wrapper.m_CarouselActionsCallbackInterface.OnCycleRight;
+                @CycleRight.performed -= m_Wrapper.m_CarouselActionsCallbackInterface.OnCycleRight;
+                @CycleRight.canceled -= m_Wrapper.m_CarouselActionsCallbackInterface.OnCycleRight;
+                @Select.started -= m_Wrapper.m_CarouselActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_CarouselActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_CarouselActionsCallbackInterface.OnSelect;
+                @Back.started -= m_Wrapper.m_CarouselActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_CarouselActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_CarouselActionsCallbackInterface.OnBack;
+            }
+            m_Wrapper.m_CarouselActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @CycleLeft.started += instance.OnCycleLeft;
+                @CycleLeft.performed += instance.OnCycleLeft;
+                @CycleLeft.canceled += instance.OnCycleLeft;
+                @CycleRight.started += instance.OnCycleRight;
+                @CycleRight.performed += instance.OnCycleRight;
+                @CycleRight.canceled += instance.OnCycleRight;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
+            }
+        }
+    }
+    public CarouselActions @Carousel => new CarouselActions(this);
     public interface IInGameActions
     {
         void OnMoveUp(InputAction.CallbackContext context);
@@ -299,5 +468,12 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
         void OnUndo(InputAction.CallbackContext context);
+    }
+    public interface ICarouselActions
+    {
+        void OnCycleLeft(InputAction.CallbackContext context);
+        void OnCycleRight(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
 }

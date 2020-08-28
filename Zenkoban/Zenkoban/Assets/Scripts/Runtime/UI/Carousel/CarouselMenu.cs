@@ -5,6 +5,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenkoban.Extensions.Utility.Collections;
+using Zenkoban.Input.Movement;
 using Zenkoban.Runtime.UI.Core;
 using Zenkoban.Settings;
 
@@ -25,6 +26,13 @@ namespace Zenkoban.Runtime.UI.Carousel
 		private int selectedIndex;
 		private bool isTransitioning;
 
+		private void Start()
+		{
+			var inputProvider = FindObjectOfType<CarouselInputProvider>();
+			inputProvider.OnCycleLeft += CycleLeft;
+			inputProvider.OnCycleRight += CycleRight;
+		}
+		
 		public void Initialize(IEnumerable<ICarouselPanel> newPanels)
 		{
 			panels = new List<ICarouselPanel>();
