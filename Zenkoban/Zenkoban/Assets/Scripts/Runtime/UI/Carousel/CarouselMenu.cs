@@ -13,6 +13,8 @@ namespace Zenkoban.Runtime.UI.Carousel
 {
 	public class CarouselMenu : MonoBehaviour
 	{
+		public event Action<ICarouselPanel, int> OnItemSelected;
+		
 		[SerializeField]
 		private Transform panelContainer = null;
 
@@ -31,8 +33,14 @@ namespace Zenkoban.Runtime.UI.Carousel
 			var inputProvider = FindObjectOfType<CarouselInputProvider>();
 			inputProvider.OnCycleLeft += CycleLeft;
 			inputProvider.OnCycleRight += CycleRight;
+			inputProvider.OnSelect += HandleSelection;
 		}
-		
+
+		private void HandleSelection()
+		{
+			OnItemSelected?.Invoke(panels[selectedIndex], selectedIndex); 
+		}
+
 		public void Initialize(IEnumerable<ICarouselPanel> newPanels)
 		{
 			panels = new List<ICarouselPanel>();
