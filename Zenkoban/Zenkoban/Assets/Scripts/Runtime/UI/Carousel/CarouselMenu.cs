@@ -5,6 +5,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenkoban.Extensions.Utility.Collections;
+using Zenkoban.Runtime.UI.Core;
 using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.UI.Carousel
@@ -20,13 +21,13 @@ namespace Zenkoban.Runtime.UI.Carousel
 		[SerializeField]
 		private float nonFocusScale = 0.6f;
 		
-		private List<Transform> panels;
+		private List<ICarouselPanel> panels;
 		private int selectedIndex;
 		private bool isTransitioning;
 
-		public void Initialize(IEnumerable<GameObject> newPanels)
+		public void Initialize(IEnumerable<ICarouselPanel> newPanels)
 		{
-			panels = new List<Transform>();
+			panels = new List<ICarouselPanel>();
 			
 			var runningSpacing = 0f;
 			foreach (var panel in newPanels)
@@ -36,15 +37,16 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 				panel.transform.localScale = Vector3.one * nonFocusScale;
 				
-				panels.Add(panel.transform);
+				panels.Add(panel);
 				
 				runningSpacing += panelSpacing;
 			}
 
 			selectedIndex = 0;
-			panels[selectedIndex].localScale = Vector3.one;
+			panels[selectedIndex].transform.localScale = Vector3.one;
 			
 			ChangeNonFocusedPanels(selectedIndex, float.Epsilon);
+			HandleEnablingAndDisablingOfPanels();
 		}
 
 		
@@ -80,7 +82,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 				return;
 			}
 			
-			var panelToEnlarge = panels[index];
+			var panelToEnlarge = panels[index].transform;
 
 			var numberOfPanelsToScroll = selectedIndex - index;
 
@@ -106,6 +108,16 @@ namespace Zenkoban.Runtime.UI.Carousel
 		private void HandleTransitionComplete()
 		{
 			isTransitioning = false;
+			HandleEnablingAndDisablingOfPanels();
+		}
+
+		private void HandleEnablingAndDisablingOfPanels()
+		{
+			panels[selectedIndex].Enable();
+			foreach (var panel in panels.Except(new[] {panels[selectedIndex]}))
+			{
+				panel.Disable();
+			}
 		}
 
 		private float GetAlphaBasedOnDistance(int distance) => alphasBasedOnDistance.ContainsKey(distance) ? alphasBasedOnDistance[distance] : 0f;
@@ -134,7 +146,6 @@ namespace Zenkoban.Runtime.UI.Carousel
 			{2, 0.5f},
 		};
 		
-		
 		private void ChangeNonFocusedPanels(int index, float totalDuration)
 		{
 			for (var x = 0; x < panels.Count; x++)
@@ -149,14 +160,14 @@ namespace Zenkoban.Runtime.UI.Carousel
 		private void ScalePanel(int index, int distance, float totalDuration)
 		{
 			var scaleFactor = GetScaleBasedOnDistance(distance);	
-			Scale(panels[index], scaleFactor, totalDuration);
+			Scale(panels[index].transform, scaleFactor, totalDuration);
 		}
 
 		private void FadePanel(int index, int distance, float totalDuration)
 		{
 			var opacityScaleFactor = GetAlphaBasedOnDistance(distance);
 				
-			panels[index].GetComponent<CanvasGroup>().DOFade(opacityScaleFactor, totalDuration).Play();
+			panels[index].transform.GetComponent<CanvasGroup>().DOFade(opacityScaleFactor, totalDuration).Play();
 		}
 	}
 }
