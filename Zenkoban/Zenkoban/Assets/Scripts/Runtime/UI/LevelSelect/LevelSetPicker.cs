@@ -9,8 +9,7 @@ namespace Zenkoban.Runtime.UI.LevelSelect
 {
 	public class LevelSetPicker : SerializedMonoBehaviour
 	{
-		[SerializeField]
-		private LevelSet[] levelSet = null;
+		[SerializeField] private GameLevelsConfiguration levels = null;
 
 		[SerializeField]
 		private LevelSetCarouselPanel panelPrefab = null;
@@ -20,7 +19,7 @@ namespace Zenkoban.Runtime.UI.LevelSelect
 
 		private void Start()
 		{
-			var panels = levelSet.Select(set => Instantiate(panelPrefab).gameObject).ToArray();
+			var panels = levels.MainLevels.Select(set => Instantiate(panelPrefab).gameObject).ToArray();
 			var carouselMenu = carouelMenuBuilder.Build(panels);
 			carouselMenu.transform.position = Vector3.down * 25f;
 			carouselMenu.transform.DOJump(Vector3.down, 2f, 3, 1f).Play();

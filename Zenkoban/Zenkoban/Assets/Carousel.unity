@@ -678,17 +678,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  levelSet:
-  - {fileID: 11400000, guid: dcffbd0ef3348ea47a822ca444f92d03, type: 2}
-  - {fileID: 11400000, guid: 17a88912456e0ae43b7dfbc3b368dda3, type: 2}
-  - {fileID: 11400000, guid: 9801d86d9dcefbf4ca47ad0d74b75835, type: 2}
-  - {fileID: 11400000, guid: 28996e4774a795a459642e7b10b94fba, type: 2}
-  - {fileID: 11400000, guid: d830b0272879ba441bba7c693d0a1060, type: 2}
-  - {fileID: 11400000, guid: 63162e722a6ad134e851c3dd488e5984, type: 2}
-  - {fileID: 11400000, guid: 19092bd1920e8c241a0f99779003779f, type: 2}
-  - {fileID: 11400000, guid: 123ad16d1c81e1a40967bddb77489a3f, type: 2}
-  - {fileID: 11400000, guid: 815bdd58f57818d41bb021c6f8309c05, type: 2}
-  - {fileID: 11400000, guid: 9c2abf4f579000a4094659658ed43d23, type: 2}
+  levels: {fileID: 11400000, guid: 1cb6529504d4fc643b46757c9af1db62, type: 2}
   panelPrefab: {fileID: 778673244356706749, guid: e22936477eac82e429140be10a6189bb,
     type: 3}
   carouelMenuBuilder: {fileID: 350235375}

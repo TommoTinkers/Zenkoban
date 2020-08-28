@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenkoban.Assets.Levels;
 
 namespace Zenkoban.Assets.Flow.Levels
 {
@@ -9,9 +8,18 @@ namespace Zenkoban.Assets.Flow.Levels
 	public class LevelSet : SerializedScriptableObject
 	{
 		[SerializeField]
-		private Dictionary<Guid,LevelEntry> levels = new Dictionary<Guid, LevelEntry>();
-
+		private LevelAsset fallbackLevel = null;
+		
 		[SerializeField]
-		private Dictionary<Guid, LevelEntry> bonusLevels = new Dictionary<Guid, LevelEntry>();
+		private LevelAsset[] levels = null;
+
+		[SerializeField] 
+		private LevelAsset[] bonusLevels = null;
+
+		public LevelAsset FallbackLevel => fallbackLevel;
+
+		public LevelAsset[] Levels => levels;
+
+		public LevelAsset[] BonusLevels => bonusLevels;
 	}
 }

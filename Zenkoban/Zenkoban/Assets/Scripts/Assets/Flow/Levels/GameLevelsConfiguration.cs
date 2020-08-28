@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,9 +8,8 @@ namespace Zenkoban.Assets.Flow.Levels
 	public class GameLevelsConfiguration : SerializedScriptableObject
 	{
 		[SerializeField]
-		private LevelSet[] _mainLevels;
+		private LevelSet[] mainLevels = null;
 
-		[SerializeField]
-		private LevelEntry[] _secretLevels;
+		public IEnumerable<LevelSet> MainLevels => mainLevels;
 	}
 }
