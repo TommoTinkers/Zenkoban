@@ -763,6 +763,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   levelSetPicker: {fileID: 2072716672}
+  levelPicker: {fileID: 2072716675}
 --- !u!114 &2072716675
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ namespace Zenkoban.Runtime.UI.LevelSelect
 		
 		public Transform CreatePicker(LevelSet levelSet)
 		{
-			var panels = levelSet.Levels.Select(set => Instantiate(panelPrefab)).ToArray();
+			var panels = levelSet.AllLevels().Select(set => Instantiate(panelPrefab)).ToArray();
 			var carouselMenu = carouselMenuBuilder.Build(panels);
 
 			Action<ICarouselPanel, int> handleItemSelectedCallback = (panel, i) =>
@@ -34,7 +34,7 @@ namespace Zenkoban.Runtime.UI.LevelSelect
 
 		private void HandleItemSelected(LevelSet set, int selectedIndex)
 		{
-			OnLevelPicked?.Invoke(set.Levels[selectedIndex]);
+			OnLevelPicked?.Invoke(set[selectedIndex]);
 		}
 	}
 }

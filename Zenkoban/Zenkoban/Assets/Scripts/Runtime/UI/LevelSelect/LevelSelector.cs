@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenkoban.Assets.Flow.Levels;
 
 namespace Zenkoban.Runtime.UI.LevelSelect
 {
@@ -8,10 +9,19 @@ namespace Zenkoban.Runtime.UI.LevelSelect
 	public class LevelSelector : SerializedMonoBehaviour
 	{
 		[SerializeField] private LevelSetPicker levelSetPicker = null;
-		
+		[SerializeField] private LevelPicker levelPicker = null;
+
 		private void Awake()
 		{
-			ShowLevelSetPicker();	
+			ShowLevelSetPicker();
+			levelSetPicker.OnLevelSetPicked += HandleLevelSetPicked;
+		}
+
+		private void HandleLevelSetPicked(LevelSet obj)
+		{
+			var picker = levelPicker.CreatePicker(obj);
+			picker.position = Vector3.up * 25;
+			picker.DOJump(Vector3.up, 2f, 3, 1f).Play();
 		}
 
 		private void ShowLevelSetPicker()

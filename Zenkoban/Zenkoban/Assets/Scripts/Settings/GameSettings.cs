@@ -14,5 +14,8 @@
 		public const int BlockJumpCount = 5;
 		public const float BlockJumpPower = 16f;
 		public const float CarouselDuration = 0.35f;
+		public const int StandardLevelsPerSet = 25;
+		public const int BonusLevelsPerSet = 5;
+		public const int TotalLevelsPerSet = StandardLevelsPerSet + BonusLevelsPerSet;
 	}
 }
