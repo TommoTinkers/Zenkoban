@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 560880713915457448}
   - component: {fileID: 560880713915457451}
+  - component: {fileID: 4115909538956193065}
   m_Layer: 0
   m_Name: CarouselMenu
   m_TagString: Untagged
@@ -44,9 +45,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0282a4a18c86456e8062f2e4de141da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 4115909538956193065}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: inputProvider
+      Entry: 10
+      Data: 0
   panelContainer: {fileID: 560880714445951356}
   panelSpacing: 2.7
   nonFocusScale: 0.8
+--- !u!114 &4115909538956193065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560880713915457450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2631e03321714711a56c54b3bb737050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &560880714445951359
 GameObject:
   m_ObjectHideFlags: 0

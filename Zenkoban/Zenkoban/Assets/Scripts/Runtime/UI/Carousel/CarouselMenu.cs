@@ -11,7 +11,7 @@ using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.UI.Carousel
 {
-	public class CarouselMenu : MonoBehaviour
+	public class CarouselMenu : SerializedMonoBehaviour
 	{
 		public event Action<ICarouselPanel, int> OnItemSelected;
 		public event Action OnUserChoseBack;
@@ -24,6 +24,8 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 		[SerializeField]
 		private float nonFocusScale = 0.6f;
+
+		[SerializeField] private ICarouselInputProvider inputProvider = null;
 		
 		private List<ICarouselPanel> panels;
 		private int selectedIndex;
@@ -31,7 +33,6 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 		private void Start()
 		{
-			var inputProvider = FindObjectOfType<CarouselInputProvider>();
 			inputProvider.OnCycleLeft += CycleLeft;
 			inputProvider.OnCycleRight += CycleRight;
 			inputProvider.OnSelect += HandleSelection;
