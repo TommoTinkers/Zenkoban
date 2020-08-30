@@ -5,14 +5,18 @@ using Zenkoban.Runtime.UI.Core;
 
 namespace Zenkoban.Runtime.UI.Carousel
 {
-	public class CarouselMenuBuilder : SerializedMonoBehaviour
+	public class CarouselMenuBuilder
 	{
-		[SerializeField]
-		private CarouselMenu prefab = null;
-		
-		public CarouselMenu Build(IEnumerable<ICarouselPanel> newPanels)
+		private readonly CarouselMenu prefab = null;
+
+		public CarouselMenuBuilder(CarouselMenu prefab)
 		{
-			var carouselMenu = Instantiate(prefab);
+			this.prefab = prefab;
+		}
+
+		public CarouselMenu Build(IEnumerable<ICarouselPanel> newPanels, int index = 0)
+		{
+			var carouselMenu = Object.Instantiate(prefab);
 			
 			carouselMenu.Initialize(newPanels);
 

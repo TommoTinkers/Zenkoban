@@ -4,6 +4,11 @@ namespace Zenkoban.Extensions.Utility.Collections
 {
 	public static class IListExtensions
 	{
+		public static bool IsLast<T>(this IList<T> list, int index)
+		{
+			return index == list.Count - 1;
+		}
+		
 		public static bool IsNotLast<T>(this IList<T> list, int index)
 		{
 			return index < list.Count - 1;

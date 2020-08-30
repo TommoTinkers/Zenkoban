@@ -49,7 +49,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			OnItemSelected?.Invoke(panels[selectedIndex], selectedIndex); 
 		}
 
-		public void Initialize(IEnumerable<ICarouselPanel> newPanels)
+		public void Initialize(IEnumerable<ICarouselPanel> newPanels, int index = 0)
 		{
 			panels = new List<ICarouselPanel>();
 			
@@ -66,10 +66,11 @@ namespace Zenkoban.Runtime.UI.Carousel
 				runningSpacing += panelSpacing;
 			}
 
-			selectedIndex = 0;
+			selectedIndex = index;
 			panels[selectedIndex].transform.localScale = Vector3.one;
 			
 			ChangeNonFocusedPanels(selectedIndex, float.Epsilon);
+			CycleTo(selectedIndex, 0.01f);
 			HandleEnablingAndDisablingOfPanels();
 		}
 
