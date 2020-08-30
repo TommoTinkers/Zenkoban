@@ -15,7 +15,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 	{
 		public event Action<ICarouselPanel, int> OnItemSelected;
 		public event Action OnUserChoseBack;
-		
+
 		[SerializeField]
 		private Transform panelContainer = null;
 
@@ -25,18 +25,34 @@ namespace Zenkoban.Runtime.UI.Carousel
 		[SerializeField]
 		private float nonFocusScale = 0.6f;
 
+
 		[SerializeField] private ICarouselInputProvider inputProvider = null;
-		
+
 		private List<ICarouselPanel> panels;
 		private int selectedIndex;
 		private bool isTransitioning;
+		private bool menuEnabled = true;
 
+		public void Enable() => menuEnabled = true;
+		public void Disable() => menuEnabled = false;
+		
 		private void Start()
 		{
-			inputProvider.OnCycleLeft += CycleLeft;
-			inputProvider.OnCycleRight += CycleRight;
-			inputProvider.OnSelect += HandleSelection;
-			inputProvider.OnBack += HandleUserGoingBack;
+			inputProvider.OnCycleLeft += IfMenuEnabledThen(CycleLeft);
+			inputProvider.OnCycleRight += IfMenuEnabledThen(CycleRight);
+			inputProvider.OnSelect += IfMenuEnabledThen(HandleSelection);
+			inputProvider.OnBack += IfMenuEnabledThen(HandleUserGoingBack);
+		}
+
+		private Action IfMenuEnabledThen(Action action)
+		{
+			return () =>
+			{
+				if (menuEnabled)
+				{
+					action?.Invoke();
+				}
+			};
 		}
 
 		private void HandleUserGoingBack()
@@ -74,7 +90,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			HandleEnablingAndDisablingOfPanels();
 		}
 
-		
+
 		[Button("CycleRight")]
 		public void CycleRight() => CycleTo(selectedIndex + 1, GameSettings.CarouselDuration);
 
@@ -147,6 +163,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 		private float GetAlphaBasedOnDistance(int distance) => alphasBasedOnDistance.ContainsKey(distance) ? alphasBasedOnDistance[distance] : 0f;
 
+
 		private float GetScaleBasedOnDistance(int distance)
 		{
 			CreateScalesDistanceTable();
@@ -164,13 +181,14 @@ namespace Zenkoban.Runtime.UI.Carousel
 		}
 
 		private Dictionary<int, float> scalesBasedOnDistance;
+
 		private readonly Dictionary<int, float> alphasBasedOnDistance = new Dictionary<int, float>
 		{
 			{0, 1f},
 			{1, 0.8f},
 			{2, 0.5f},
 		};
-		
+
 		private void ChangeNonFocusedPanels(int index, float totalDuration)
 		{
 			for (var x = 0; x < panels.Count; x++)
