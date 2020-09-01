@@ -24,8 +24,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 		[SerializeField]
 		private float nonFocusScale = 0.6f;
-
-
+		
 		[SerializeField] private ICarouselInputProvider inputProvider = null;
 
 		private List<ICarouselPanel> panels;
@@ -73,10 +72,9 @@ namespace Zenkoban.Runtime.UI.Carousel
 			foreach (var panel in newPanels)
 			{
 				panel.transform.position = panelContainer.position + Vector3.right * runningSpacing;
-				panel.transform.SetParent(panelContainer, true);
-
-				panel.transform.localScale = Vector3.one * nonFocusScale;
 				
+				panel.transform.localScale = Vector3.one * nonFocusScale;
+				panel.transform.SetParent(panelContainer, true);
 				panels.Add(panel);
 				
 				runningSpacing += panelSpacing;
@@ -86,7 +84,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			panels[selectedIndex].transform.localScale = Vector3.one;
 			
 			ChangeNonFocusedPanels(selectedIndex, float.Epsilon);
-			CycleTo(selectedIndex, 0.01f);
+			CycleTo(selectedIndex, float.Epsilon);
 			HandleEnablingAndDisablingOfPanels();
 		}
 
@@ -128,7 +126,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			var numberOfPanelsToScroll = selectedIndex - index;
 
 			var newContainerPosition = panelContainer.position + Vector3.right * (numberOfPanelsToScroll * panelSpacing);
-			var anim = panelContainer.DOMove(newContainerPosition, totalDuration);
+			var anim = panelContainer.DOLocalMove(newContainerPosition, totalDuration);
 			anim.onComplete += () =>
 			{
 				selectedIndex = index;

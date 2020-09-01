@@ -11,6 +11,8 @@ namespace Zenkoban.Runtime.UI.Carousel.LevelSelection
 	{
 		[SerializeField] private GameLevelsConfiguration gameLevels = null;
 		[SerializeField] private LevelSetCarouselPanel levelSetPanelPrefab = null;
+
+		[SerializeField] private LevelCarouselPanel levelCarouselPanelPrefab = null;
 		[SerializeField] private CarouselMenu carouselMenuPrefab = null;
 		
 		private CarouselMenuBuilder carouselMenuBuilder;
@@ -32,12 +34,18 @@ namespace Zenkoban.Runtime.UI.Carousel.LevelSelection
 		private CarouselMenu CreateRootMenu(int index)
 		{
 			var panels = gameLevels.MainLevels.Select(set => Instantiate(levelSetPanelPrefab)).ToArray();
-			return carouselMenuBuilder.Build(panels, index);
+			var menu =  carouselMenuBuilder.Build(panels, index);
+			menu.transform.Translate(Vector3.up * 25f);
+			
+			
+			return menu;
 		}
 
 		private CarouselMenu CreateLevelMenu(int index)
 		{
-			return null;
+			var levels = gameLevels.MainLevels[index].Levels;
+			var panels = levels.Select(level => Instantiate(levelCarouselPanelPrefab)).ToArray();
+			return carouselMenuBuilder.Build(panels, 0);
 		}
 	}
 }

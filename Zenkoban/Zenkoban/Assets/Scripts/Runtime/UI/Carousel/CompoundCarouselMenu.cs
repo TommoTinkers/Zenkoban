@@ -9,7 +9,8 @@ namespace Zenkoban.Runtime.UI.Carousel
 {
 	public interface ICarouselTweeningStrategy
 	{
-		void Out(CarouselMenu menu, Action<CarouselMenu> action);
+		void Out(CarouselMenu menu, Action<CarouselMenu> callback);
+		void In(CarouselMenu menu, Action<CarouselMenu> callback);
 	}
 	
 	public class CompoundCarouselMenu
@@ -27,6 +28,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			this.tweener = tweener;
 			currentCarouselMenu = carouselMenuCreators[0]?.Invoke(rootMenuStartIndex);
 			currentCarouselMenu.OnItemSelected += HandleCarouselItemSelected;
+			tweener.In(currentCarouselMenu, c => c.Enable());
 		}
 
 		private void HandleCarouselItemSelected(ICarouselPanel panel, int index)
@@ -42,7 +44,6 @@ namespace Zenkoban.Runtime.UI.Carousel
 				//This means the user has selected an item. Invoke the item chosen event.
 				//Tween out the current menu ?? 
 			}
-			
 		}
 
 		private void KillMenu(CarouselMenu menu)
@@ -51,7 +52,6 @@ namespace Zenkoban.Runtime.UI.Carousel
 			//Tween out the menu
 			tweener.Out(menu, Object.Destroy);
 			//Destroy the menu after tween is complete.
-
 		}
 	}
 }

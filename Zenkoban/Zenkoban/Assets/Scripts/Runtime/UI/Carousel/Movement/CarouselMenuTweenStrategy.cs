@@ -8,9 +8,9 @@ namespace Zenkoban.Runtime.UI.Carousel.Movement
 	{
 		private const float duration = GameSettings.CarouselInOutDuration;
 		
-		public void Out(CarouselMenu menu, Action<CarouselMenu> action) => Tween(menu, action, -15f, duration);
+		public void Out(CarouselMenu menu, Action<CarouselMenu> callback) => Tween(menu, callback, -15f, duration);
 
-		public void In(CarouselMenu menu, Action<CarouselMenu> action) => Tween(menu, action, 0f, duration);
+		public void In(CarouselMenu menu, Action<CarouselMenu> callback) => Tween(menu, callback, 0f, duration);
 		private void Tween(CarouselMenu menu, Action<CarouselMenu> action, float yValue, float duration)
 		{
 			var anim = menu.transform.DOMoveY(yValue, duration);

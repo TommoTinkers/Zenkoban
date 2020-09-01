@@ -10,6 +10,6 @@ namespace Zenkoban.Assets.Flow.Levels
 		[SerializeField]
 		private LevelSet[] mainLevels = null;
 
-		public IEnumerable<LevelSet> MainLevels => mainLevels;
+		public IReadOnlyList<LevelSet> MainLevels => mainLevels;
 	}
 }
