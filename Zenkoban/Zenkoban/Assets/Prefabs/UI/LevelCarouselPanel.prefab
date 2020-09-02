@@ -290,6 +290,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  canvas: {fileID: 778673244356706739}
 --- !u!1 &778673244778372914
 GameObject:
   m_ObjectHideFlags: 0

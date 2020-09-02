@@ -71,7 +71,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			var runningSpacing = 0f;
 			foreach (var panel in newPanels)
 			{
-				panel.transform.position = panelContainer.position + Vector3.right * runningSpacing;
+				panel.transform.localPosition = panelContainer.localPosition + Vector3.right * runningSpacing;
 				
 				panel.transform.localScale = Vector3.one * nonFocusScale;
 				panel.transform.SetParent(panelContainer, true);
@@ -80,11 +80,11 @@ namespace Zenkoban.Runtime.UI.Carousel
 				runningSpacing += panelSpacing;
 			}
 
-			selectedIndex = index;
-			panels[selectedIndex].transform.localScale = Vector3.one;
 			
-			ChangeNonFocusedPanels(selectedIndex, float.Epsilon);
-			CycleTo(selectedIndex, float.Epsilon);
+			panels[index].transform.localScale = Vector3.one;
+			
+			ChangeNonFocusedPanels(index, float.Epsilon);
+			CycleTo(index, 0.1f);
 			HandleEnablingAndDisablingOfPanels();
 		}
 
@@ -95,20 +95,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 		[Button("CycleLeft")]
 		public void CycleLeft() => CycleTo(selectedIndex - 1, GameSettings.CarouselDuration);
 
-		[Button("Right 5")]
-		public void CycleRightFive()
-		{
-			var targetIndex = panels.ThisIndexOrMax(selectedIndex + 5);
-			CycleTo(targetIndex, GameSettings.CarouselDuration * 2.5f);
-		}
-
-		[Button("Left 5")]
-		public void CycleLeftFive()
-		{
-			var targetIndex = panels.ThisIndexOrMin(selectedIndex - 5);
-			CycleTo(targetIndex, GameSettings.CarouselDuration * 2.5f);
-		}
-
+		
 		private static void Scale(Transform panel, float scaleMultiplier, float duration)
 		{
 			panel.DOScale(Vector3.one * scaleMultiplier, duration).Play();
@@ -125,7 +112,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 			var numberOfPanelsToScroll = selectedIndex - index;
 
-			var newContainerPosition = panelContainer.position + Vector3.right * (numberOfPanelsToScroll * panelSpacing);
+			var newContainerPosition = panelContainer.localPosition + Vector3.right * (numberOfPanelsToScroll * panelSpacing);
 			var anim = panelContainer.DOLocalMove(newContainerPosition, totalDuration);
 			anim.onComplete += () =>
 			{
@@ -195,6 +182,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 				
 				FadePanel(x, dist, totalDuration);
 				ScalePanel(x, dist, totalDuration);
+				panels[x].Canvas.sortingOrder = panels.Count() - dist;
 			}
 		}
 

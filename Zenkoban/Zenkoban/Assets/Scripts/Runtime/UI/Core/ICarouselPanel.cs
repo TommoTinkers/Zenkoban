@@ -6,6 +6,8 @@ namespace Zenkoban.Runtime.UI.Core
 	{
 		Transform transform { get; }
 		
+		Canvas Canvas { get; }
+		
 		void Enable();
 		void Disable();
 	}

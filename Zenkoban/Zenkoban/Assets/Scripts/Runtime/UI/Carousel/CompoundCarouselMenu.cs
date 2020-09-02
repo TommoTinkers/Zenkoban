@@ -1,23 +1,18 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenkoban.Extensions.Utility.Collections;
+using Zenkoban.Runtime.UI.Carousel.Movement;
 using Zenkoban.Runtime.UI.Core;
 using Object = UnityEngine.Object;
 
 namespace Zenkoban.Runtime.UI.Carousel
 {
-	public interface ICarouselTweeningStrategy
-	{
-		void Out(CarouselMenu menu, Action<CarouselMenu> callback);
-		void In(CarouselMenu menu, Action<CarouselMenu> callback);
-	}
-	
 	public class CompoundCarouselMenu
 	{
 		private readonly IList<Func<int, CarouselMenu>> carouselMenuCreators;
 		private readonly ICarouselTweeningStrategy tweener;
-
+		private readonly Stack<int> previousSelectedIndices = new Stack<int>();
+		
 		private CarouselMenu currentCarouselMenu;
 		
 		private int currentMenuIndex = 0;
@@ -35,6 +30,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 		{
 			if (carouselMenuCreators.IsNotLast(currentMenuIndex))
 			{
+				previousSelectedIndices.Push(selectedIndex);
 				KillMenu(currentCarouselMenu);
 				currentMenuIndex++;
 				ShowSubMenu(selectedIndex);
@@ -47,10 +43,22 @@ namespace Zenkoban.Runtime.UI.Carousel
 			}
 		}
 
+		private void HandleBackSelected()
+		{
+			if (carouselMenuCreators.IsNotFirst(currentMenuIndex))
+			{
+				var returnSelectedIndex = previousSelectedIndices.Pop();
+				KillMenu(currentCarouselMenu);
+				currentMenuIndex--;
+				ShowSubMenu(returnSelectedIndex);
+			}
+		}
+		
 		private void ShowSubMenu(int selectedIndex)
 		{
 			currentCarouselMenu = carouselMenuCreators[currentMenuIndex]?.Invoke(selectedIndex);
 			currentCarouselMenu.OnItemSelected += HandleCarouselItemSelected;
+			currentCarouselMenu.OnUserChoseBack += HandleBackSelected;
 			tweener.In(currentCarouselMenu, c => c.Enable());
 		}
 

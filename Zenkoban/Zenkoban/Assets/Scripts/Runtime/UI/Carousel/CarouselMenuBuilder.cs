@@ -18,7 +18,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 		{
 			var carouselMenu = Object.Instantiate(prefab);
 			
-			carouselMenu.Initialize(newPanels);
+			carouselMenu.Initialize(newPanels, index);
 
 			return carouselMenu;
 		}
