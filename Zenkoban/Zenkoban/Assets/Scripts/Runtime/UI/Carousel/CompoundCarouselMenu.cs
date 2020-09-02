@@ -20,37 +20,45 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 		private CarouselMenu currentCarouselMenu;
 		
-		private int currentIndex = 0;
+		private int currentMenuIndex = 0;
 		
 		public CompoundCarouselMenu(IList<Func<int, CarouselMenu>> carouselMenuCreators, ICarouselTweeningStrategy tweener, int rootMenuStartIndex = 0)
 		{
 			this.carouselMenuCreators = carouselMenuCreators;
 			this.tweener = tweener;
-			currentCarouselMenu = carouselMenuCreators[0]?.Invoke(rootMenuStartIndex);
+			currentCarouselMenu = carouselMenuCreators[currentMenuIndex]?.Invoke(rootMenuStartIndex);
 			currentCarouselMenu.OnItemSelected += HandleCarouselItemSelected;
 			tweener.In(currentCarouselMenu, c => c.Enable());
 		}
 
-		private void HandleCarouselItemSelected(ICarouselPanel panel, int index)
+		private void HandleCarouselItemSelected(ICarouselPanel panel, int selectedIndex)
 		{
-			if (carouselMenuCreators.IsNotLast(currentIndex))
+			if (carouselMenuCreators.IsNotLast(currentMenuIndex))
 			{
 				KillMenu(currentCarouselMenu);
-				//Bring in the new menu.	
+				currentMenuIndex++;
+				ShowSubMenu(selectedIndex);
 			}
 
-			if (carouselMenuCreators.IsLast(currentIndex))
+			if (carouselMenuCreators.IsLast(currentMenuIndex))
 			{
 				//This means the user has selected an item. Invoke the item chosen event.
 				//Tween out the current menu ?? 
 			}
 		}
 
+		private void ShowSubMenu(int selectedIndex)
+		{
+			currentCarouselMenu = carouselMenuCreators[currentMenuIndex]?.Invoke(selectedIndex);
+			currentCarouselMenu.OnItemSelected += HandleCarouselItemSelected;
+			tweener.In(currentCarouselMenu, c => c.Enable());
+		}
+
 		private void KillMenu(CarouselMenu menu)
 		{
 			menu.Disable();
 			//Tween out the menu
-			tweener.Out(menu, Object.Destroy);
+			tweener.Out(menu, m => Object.Destroy(menu.gameObject));
 			//Destroy the menu after tween is complete.
 		}
 	}
