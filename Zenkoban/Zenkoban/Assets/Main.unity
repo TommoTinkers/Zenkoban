@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -330,16 +330,13 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 4a65835e8e9e5de4f8083663c346ee26, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: levelAsset
-      Entry: 10
-      Data: 0
+    SerializationNodes: []
+  levelSets: {fileID: 11400000, guid: 1cb6529504d4fc643b46757c9af1db62, type: 2}
   levelSpawner: {fileID: 652149366}
 --- !u!4 &652149365
 Transform:

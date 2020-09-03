@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  fallbackLevel: {fileID: 0}
+  setName: Epsilon
+  fallbackLevel: {fileID: 11400000, guid: 4a65835e8e9e5de4f8083663c346ee26, type: 2}
   levels: []
   bonusLevels: []
