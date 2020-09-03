@@ -13,15 +13,21 @@ namespace Zenkoban.Runtime.UI.Carousel
 		private TMP_Text levelSetTitle = null;
 		
 		public Canvas Canvas => canvas;
+
+
+		public void SetTitle(string title)
+		{
+			levelSetTitle.text = title;
+		}
 		
 		public void Enable()
 		{
-			levelSetTitle.text = "Enabled";
+			
 		}
 
 		public void Disable()
 		{
-			levelSetTitle.text = "Disabled";
+			
 		}
 	}
 }

@@ -11,6 +11,9 @@ namespace Zenkoban.Assets.Flow.Levels
 	public class LevelSet : SerializedScriptableObject
 	{
 		[SerializeField]
+		private string setName = null;
+		
+		[SerializeField]
 		private LevelAsset fallbackLevel = null;
 		
 		[SerializeField]
@@ -25,6 +28,7 @@ namespace Zenkoban.Assets.Flow.Levels
 
 		public LevelAsset[] BonusLevels => bonusLevels;
 
+		public string SetName => setName;
 		public LevelAsset this[int index]
 		{
 			get

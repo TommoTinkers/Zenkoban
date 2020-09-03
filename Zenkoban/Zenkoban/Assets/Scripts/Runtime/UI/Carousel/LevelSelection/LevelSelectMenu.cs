@@ -33,7 +33,13 @@ namespace Zenkoban.Runtime.UI.Carousel.LevelSelection
 
 		private CarouselMenu CreateRootMenu(int index)
 		{
-			var panels = gameLevels.MainLevels.Select(set => Instantiate(levelSetPanelPrefab)).ToArray();
+			var panels = gameLevels.MainLevels.Select(set =>
+			{
+				var panel =  Instantiate(levelSetPanelPrefab);
+				panel.SetTitle(set.SetName);
+				return panel;
+			}).ToArray();
+			
 			var menu =  carouselMenuBuilder.Build(panels, index);
 			menu.transform.Translate(Vector3.up * 25f);
 			
