@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Zenkoban.Extensions.Utility.Collections;
 using Zenkoban.Runtime.UI.Carousel.Movement;
 using Zenkoban.Runtime.UI.Core;
@@ -9,6 +10,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 {
 	public class CompoundCarouselMenu
 	{
+		public event Action<int[]> OnItemSelected;
 		private readonly IList<Func<int, CarouselMenu>> carouselMenuCreators;
 		private readonly ICarouselTweeningStrategy tweener;
 		private readonly Stack<int> previousSelectedIndices = new Stack<int>();
@@ -36,9 +38,11 @@ namespace Zenkoban.Runtime.UI.Carousel
 				ShowSubMenu(selectedIndex);
 			}
 
-			if (carouselMenuCreators.IsLast(currentMenuIndex))
+			else if (carouselMenuCreators.IsLast(currentMenuIndex))
 			{
 				//This means the user has selected an item. Invoke the item chosen event.
+				var indices = previousSelectedIndices.Concat(new[] {selectedIndex}).ToArray(); 
+				OnItemSelected?.Invoke(indices);
 				//Tween out the current menu ?? 
 			}
 		}

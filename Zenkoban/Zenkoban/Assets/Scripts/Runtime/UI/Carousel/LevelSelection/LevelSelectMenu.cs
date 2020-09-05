@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenkoban.Assets.Flow.Levels;
+using Zenkoban.Runtime.Flow.Levels;
 using Zenkoban.Runtime.UI.Carousel.Movement;
 
 namespace Zenkoban.Runtime.UI.Carousel.LevelSelection
@@ -29,6 +31,14 @@ namespace Zenkoban.Runtime.UI.Carousel.LevelSelection
 			};
 			
 			compoundCarouselMenu = new CompoundCarouselMenu(menuCreators, new CarouselMenuTweenStrategy());
+			compoundCarouselMenu.OnItemSelected += HandleLevelChosen;
+		}
+
+		private void HandleLevelChosen(int[] selectedIndices)
+		{
+			LevelManager.SetIndex = selectedIndices[0];
+			LevelManager.LevelIndex = selectedIndices[1];
+			SceneManager.LoadScene("Main");
 		}
 
 		private CarouselMenu CreateRootMenu(int index)
