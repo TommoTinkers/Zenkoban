@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Carousel.unity
+    guid: 011400512b1905040a3f579e973f7c9a
   - enabled: 1
     path: Assets/Main.unity
     guid: 72969de2bd8c3ff4eb387d397fc248d5

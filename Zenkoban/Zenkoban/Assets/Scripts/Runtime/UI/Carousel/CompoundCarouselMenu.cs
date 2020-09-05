@@ -30,6 +30,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 		private void HandleCarouselItemSelected(ICarouselPanel panel, int selectedIndex)
 		{
+			currentCarouselMenu.Disable();
 			if (carouselMenuCreators.IsNotLast(currentMenuIndex))
 			{
 				previousSelectedIndices.Push(selectedIndex);
@@ -40,10 +41,13 @@ namespace Zenkoban.Runtime.UI.Carousel
 
 			else if (carouselMenuCreators.IsLast(currentMenuIndex))
 			{
-				//This means the user has selected an item. Invoke the item chosen event.
-				var indices = previousSelectedIndices.Concat(new[] {selectedIndex}).ToArray(); 
-				OnItemSelected?.Invoke(indices);
-				//Tween out the current menu ?? 
+				
+				tweener.Out(currentCarouselMenu, c =>
+				{
+					var indices = previousSelectedIndices.Concat(new[] {selectedIndex}).ToArray();
+					OnItemSelected?.Invoke(indices);
+				});
+
 			}
 		}
 
@@ -61,6 +65,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 		private void ShowSubMenu(int selectedIndex)
 		{
 			currentCarouselMenu = carouselMenuCreators[currentMenuIndex]?.Invoke(selectedIndex);
+			currentCarouselMenu.Disable();
 			currentCarouselMenu.OnItemSelected += HandleCarouselItemSelected;
 			currentCarouselMenu.OnUserChoseBack += HandleBackSelected;
 			tweener.In(currentCarouselMenu, c => c.Enable());
