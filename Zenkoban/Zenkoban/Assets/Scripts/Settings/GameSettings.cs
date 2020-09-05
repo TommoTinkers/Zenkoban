@@ -19,7 +19,5 @@
 		public const int StandardLevelsPerSet = 25;
 		public const int BonusLevelsPerSet = 5;
 		public const int TotalLevelsPerSet = StandardLevelsPerSet + BonusLevelsPerSet;
-
-		public const bool CycleLinearMenus = true;
 	}
 }

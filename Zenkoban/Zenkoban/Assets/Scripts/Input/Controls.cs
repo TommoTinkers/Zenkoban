@@ -267,12 +267,121 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""12d34be0-aa88-4682-8087-8114fd0c6df7"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""4e8e496c-978c-4835-85cc-b66185877705"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""LinearMenu"",
+            ""id"": ""ce60a70b-b0b7-4c64-891c-546354cab456"",
+            ""actions"": [
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""890bfc1e-7491-4756-a11c-1fe7d109d465"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""07f3e824-e038-41cb-b48e-f895c0150979"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""471db267-6d76-4642-bfbd-66479bfb4819"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""647265aa-80ff-472f-aea0-e447e1450aa2"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40dd651a-81d8-46d8-afa1-bce52b8af8e0"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a2045fa-b9dc-476f-aa90-3d49896d741b"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cabee40-b5b6-4a1f-98f4-2282300f548a"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a22a9293-46b9-4f2c-9453-b49f59a5fae7"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0cd9d381-af97-49c0-a938-ccd0ef16b7c0"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -294,6 +403,11 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Carousel_CycleRight = m_Carousel.FindAction("CycleRight", throwIfNotFound: true);
         m_Carousel_Select = m_Carousel.FindAction("Select", throwIfNotFound: true);
         m_Carousel_Back = m_Carousel.FindAction("Back", throwIfNotFound: true);
+        // LinearMenu
+        m_LinearMenu = asset.FindActionMap("LinearMenu", throwIfNotFound: true);
+        m_LinearMenu_Down = m_LinearMenu.FindAction("Down", throwIfNotFound: true);
+        m_LinearMenu_Up = m_LinearMenu.FindAction("Up", throwIfNotFound: true);
+        m_LinearMenu_Select = m_LinearMenu.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -461,6 +575,55 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public CarouselActions @Carousel => new CarouselActions(this);
+
+    // LinearMenu
+    private readonly InputActionMap m_LinearMenu;
+    private ILinearMenuActions m_LinearMenuActionsCallbackInterface;
+    private readonly InputAction m_LinearMenu_Down;
+    private readonly InputAction m_LinearMenu_Up;
+    private readonly InputAction m_LinearMenu_Select;
+    public struct LinearMenuActions
+    {
+        private @Controls m_Wrapper;
+        public LinearMenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Down => m_Wrapper.m_LinearMenu_Down;
+        public InputAction @Up => m_Wrapper.m_LinearMenu_Up;
+        public InputAction @Select => m_Wrapper.m_LinearMenu_Select;
+        public InputActionMap Get() { return m_Wrapper.m_LinearMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LinearMenuActions set) { return set.Get(); }
+        public void SetCallbacks(ILinearMenuActions instance)
+        {
+            if (m_Wrapper.m_LinearMenuActionsCallbackInterface != null)
+            {
+                @Down.started -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnDown;
+                @Up.started -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnUp;
+                @Select.started -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_LinearMenuActionsCallbackInterface.OnSelect;
+            }
+            m_Wrapper.m_LinearMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+            }
+        }
+    }
+    public LinearMenuActions @LinearMenu => new LinearMenuActions(this);
     public interface IInGameActions
     {
         void OnMoveUp(InputAction.CallbackContext context);
@@ -475,5 +638,11 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnCycleRight(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+    }
+    public interface ILinearMenuActions
+    {
+        void OnDown(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }
