@@ -483,6 +483,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 898416328}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &898416330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 898416328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65113e52ed484c8cbcbaf595000a4f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1350628092
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,14 +589,35 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 4394635839519759393}
+    - {fileID: 1975605786}
+    - {fileID: 898416330}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: buttons
-      Entry: 6
+      Entry: 7
+      Data: 0|Zenkoban.Runtime.UI.LinearMenu.ILinearMenuButton[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
 --- !u!114 &1350628097
 MonoBehaviour:
@@ -1012,6 +1045,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1975605784}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1975605786 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1975605784}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65113e52ed484c8cbcbaf595000a4f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2047502630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,3 +1303,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4394635839519759391}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4394635839519759393 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 4394635839519759391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65113e52ed484c8cbcbaf595000a4f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
