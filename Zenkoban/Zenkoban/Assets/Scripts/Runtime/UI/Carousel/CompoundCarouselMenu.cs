@@ -74,9 +74,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 		private void KillMenu(CarouselMenu menu)
 		{
 			menu.Disable();
-			//Tween out the menu
 			tweener.Out(menu, m => Object.Destroy(menu.gameObject));
-			//Destroy the menu after tween is complete.
 		}
 	}
 }
