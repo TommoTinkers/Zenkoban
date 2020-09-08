@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using Zenkoban.Assets.Flow.Levels;
 using Zenkoban.Runtime.Flow.Levels;
 using Zenkoban.Runtime.UI.Carousel.Movement;
+using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.UI.Carousel.LevelSelection
 {
@@ -38,7 +39,7 @@ namespace Zenkoban.Runtime.UI.Carousel.LevelSelection
 		{
 			LevelManager.SetIndex = selectedIndices[0];
 			LevelManager.LevelIndex = selectedIndices[1];
-			SceneManager.LoadScene("Main");
+			SceneManager.LoadScene(GameSettings.GameSceneName);
 		}
 
 		private CarouselMenu CreateRootMenu(int index)

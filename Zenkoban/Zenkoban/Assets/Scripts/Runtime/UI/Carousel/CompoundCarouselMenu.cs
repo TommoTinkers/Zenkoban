@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenkoban.Extensions.Utility.Collections;
 using Zenkoban.Runtime.UI.Carousel.Movement;
 using Zenkoban.Runtime.UI.Core;
+using Zenkoban.Settings;
 using Object = UnityEngine.Object;
 
 namespace Zenkoban.Runtime.UI.Carousel
@@ -25,6 +28,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			this.tweener = tweener;
 			currentCarouselMenu = carouselMenuCreators[currentMenuIndex]?.Invoke(rootMenuStartIndex);
 			currentCarouselMenu.OnItemSelected += HandleCarouselItemSelected;
+			currentCarouselMenu.OnUserChoseBack += HandleBackSelected;
 			tweener.In(currentCarouselMenu, c => c.Enable());
 		}
 
@@ -60,6 +64,10 @@ namespace Zenkoban.Runtime.UI.Carousel
 				currentMenuIndex--;
 				ShowSubMenu(returnSelectedIndex);
 			}
+			else
+			{
+				KillMenu(currentCarouselMenu, m => SceneManager.LoadScene(GameSettings.MainMenuSceneName));
+			}
 		}
 		
 		private void ShowSubMenu(int selectedIndex)
@@ -70,11 +78,17 @@ namespace Zenkoban.Runtime.UI.Carousel
 			currentCarouselMenu.OnUserChoseBack += HandleBackSelected;
 			tweener.In(currentCarouselMenu, c => c.Enable());
 		}
+		
 
-		private void KillMenu(CarouselMenu menu)
+		private void KillMenu(CarouselMenu menu, Action<CarouselMenu> callback = null)
 		{
 			menu.Disable();
-			tweener.Out(menu, m => Object.Destroy(menu.gameObject));
+			tweener.Out(menu, callback);
+			tweener.Out(menu, m =>
+			{
+				callback?.Invoke(m);
+				Object.Destroy(menu.gameObject);
+			});
 		}
 	}
 }

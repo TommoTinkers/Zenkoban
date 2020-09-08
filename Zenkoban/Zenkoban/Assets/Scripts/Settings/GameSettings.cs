@@ -19,5 +19,10 @@
 		public const int StandardLevelsPerSet = 25;
 		public const int BonusLevelsPerSet = 5;
 		public const int TotalLevelsPerSet = StandardLevelsPerSet + BonusLevelsPerSet;
+
+
+		public const string MainMenuSceneName = "MainMenu";
+		public const string GameSceneName = "Main";
+		public const string CarouselSceneName = "Carousel";
 	}
 }
