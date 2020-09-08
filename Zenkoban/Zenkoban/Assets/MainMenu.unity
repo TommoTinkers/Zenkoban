@@ -548,6 +548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1015380368}
   - component: {fileID: 1015380369}
+  - component: {fileID: 1015380370}
   m_Layer: 5
   m_Name: Handlers
   m_TagString: Untagged
@@ -584,6 +585,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98b7038ce7b94bf59d2c3e76f3118528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1015380370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015380367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4495ecf5804975a0a558cae9335502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1350628092
@@ -1409,10 +1422,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
         type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
         type: 3}
+    - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 1015380370}
+    - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[0]
+      value: '"path":"OnSelected","value":{"$id":0,"$type":"UnityEngine.Events.UnityAction,
+        UnityEngine.CoreModule","target":$eref:0,"declaringType":{"$id":1,"$type":"System.RuntimeType,
+        mscorlib","Zenkoban.Runtime.Flow.MainMenu.PlayHandler, Assembly-CSharp"},"methodName":"HandlePlaySelected","delegateType":{"$id":2,"$type":"System.RuntimeType,
+        mscorlib","UnityEngine.Events.UnityAction, UnityEngine.CoreModule"},"signature":{"$id":3,"$type":"System.Type[],
+        mscorlib","$rlength":0,"$rcontent":[]}}'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc9219dd125861a41aeee89a8bb415bc, type: 3}
 --- !u!224 &4394635839519759392 stripped
