@@ -14,14 +14,11 @@ namespace Zenkoban.Runtime.UI.LinearMenu
 		[SerializeField]
 		private GameObject unHighlightedDisplay = null;
 
-		private bool isHighlighted;
-		
 		public void Highlight() => SetIsHighlighted(true);
 		public void UnHighlight() => SetIsHighlighted(false);
 		
 		private void SetIsHighlighted(bool highlighted)
 		{
-			isHighlighted = highlighted;
 			highlightedDisplay.SetActive(highlighted);
 			unHighlightedDisplay.SetActive(!highlighted);
 		}

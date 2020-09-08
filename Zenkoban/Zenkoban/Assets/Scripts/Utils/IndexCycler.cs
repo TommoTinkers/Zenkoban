@@ -5,7 +5,7 @@ namespace Zenkoban.Utils
 {
 	public class IndexCycler
 	{
-		private Array indexable;
+		private readonly Array indexable;
 		private int current;
 
 		public static implicit operator int(IndexCycler cycler) => cycler.current;
