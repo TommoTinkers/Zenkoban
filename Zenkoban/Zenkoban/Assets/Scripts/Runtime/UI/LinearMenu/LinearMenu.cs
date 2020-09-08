@@ -26,7 +26,7 @@ namespace Zenkoban.Runtime.UI.LinearMenu
 
 		private void HandleSelect()
 		{
-			
+			buttons[currentButtonIndex].Select();
 		}
 
 		private void MoveDown()
