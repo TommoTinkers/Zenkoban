@@ -478,16 +478,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
-        type: 3}
-      propertyPath: m_text
-      value: QUIT
-      objectReference: {fileID: 0}
-    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
@@ -741,8 +731,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 30
-    m_Right: 30
+    m_Left: 45
+    m_Right: 45
     m_Top: 0
     m_Bottom: 140
   m_ChildAlignment: 4
@@ -832,8 +822,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: ZENKOBAN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8c4bb6411a323fd4c8c1d8b3f2f32d52, type: 2}
+  m_sharedMaterial: {fileID: 7032893572727126216, guid: 8c4bb6411a323fd4c8c1d8b3f2f32d52,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1160,7 +1151,32 @@ PrefabInstance:
     - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
         type: 3}
       propertyPath: m_fontSize
-      value: 42.05
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
         type: 3}
@@ -1419,6 +1435,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_text
+      value: PLAY
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
         type: 3}
