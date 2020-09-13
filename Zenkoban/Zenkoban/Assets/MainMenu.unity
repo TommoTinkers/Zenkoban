@@ -354,7 +354,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 15
+  m_Spacing: -42.7
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -477,6 +477,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_text
+      value: QUIT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435743941343352476, guid: bc9219dd125861a41aeee89a8bb415bc,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8222049273725260735, guid: bc9219dd125861a41aeee89a8bb415bc,
         type: 3}
@@ -639,7 +649,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350628092}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -799,7 +809,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 39.53}
+  m_SizeDelta: {x: 634.5, y: 39.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1454350765
 MonoBehaviour:
@@ -833,12 +843,12 @@ MonoBehaviour:
     rgba: 4278236415
   m_fontColor: {r: 1, g: 0.7045615, b: 0, a: 1}
   m_enableVertexGradient: 0
-  m_colorMode: 3
+  m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 1, g: 0.08018869, b: 0.59179085, a: 1}
+    topRight: {r: 1, g: 0.08018869, b: 0.59179085, a: 1}
+    bottomLeft: {r: 0.5943396, g: 0.25511748, b: 0.5470323, a: 0.44705883}
+    bottomRight: {r: 0.5943396, g: 0.25511748, b: 0.5470323, a: 0.44705883}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -849,8 +859,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 47.3
-  m_fontSizeBase: 47.3
+  m_fontSize: 82.63
+  m_fontSizeBase: 82.63
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1272,7 +1282,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.6539694, g: 0.8301887, b: 0.8301887, a: 0}
+  m_BackGroundColor: {r: 0.58431375, g: 0.69411767, b: 0.8000001, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
