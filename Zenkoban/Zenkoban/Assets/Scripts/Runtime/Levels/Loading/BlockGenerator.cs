@@ -14,8 +14,10 @@ namespace Zenkoban.Runtime.Levels.Loading
 			{TileType.Goal, BlockType.None},
 			{TileType.Block, BlockType.Block},
 			{TileType.Player, BlockType.Player},
-			{TileType.Wall, BlockType.Wall}
+			{TileType.Wall, BlockType.Wall},
+			{TileType.BlockOnGoal, BlockType.Block}
 		};
+		
 		public Block[,] Generate(ILevelAsset level)
 		{
 			var width = level.Size.Width;

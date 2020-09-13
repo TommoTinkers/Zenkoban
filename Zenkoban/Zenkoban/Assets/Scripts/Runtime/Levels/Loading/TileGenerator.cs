@@ -14,6 +14,7 @@ namespace Zenkoban.Runtime.Levels.Loading
 			{AssetTileType.Empty, TileType.Empty},
 			{AssetTileType.Floor, TileType.Floor},
 			{AssetTileType.Goal, TileType.Goal},
+			{AssetTileType.BlockOnGoal, TileType.Goal},
 			{AssetTileType.Block, TileType.Floor},
 			{AssetTileType.Player, TileType.Floor}
 		};

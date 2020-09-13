@@ -59,6 +59,9 @@ namespace Zenkoban.Assets.Levels
 				case TileType.Goal:
 					color = Color.cyan;
 					break;
+				case TileType.BlockOnGoal:
+					color = Color.green;
+					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
@@ -99,6 +102,11 @@ namespace Zenkoban.Assets.Levels
 			if (GUILayout.Button("GOAL"))
 			{
 				current = TileType.Goal;
+			}
+			
+			if (GUILayout.Button("BLOCK ON GOAL"))
+			{
+				current = TileType.BlockOnGoal;
 			}
 		}
 		
