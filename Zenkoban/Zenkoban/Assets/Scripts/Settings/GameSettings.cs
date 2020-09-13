@@ -10,8 +10,8 @@
 
 		public const float BlockGoalColorChangeDuration = 0.2f;
 
-		public const float BlockJumpDuration = 1.5f;
-		public const int BlockJumpCount = 5;
+		public const float BlockJumpDuration = 1.8f;
+		public const int BlockJumpCount = 4;
 		public const float BlockJumpPower = 8f;
 		
 		public const float CarouselDuration = 0.35f;

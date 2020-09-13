@@ -26,7 +26,7 @@ namespace Zenkoban.Runtime.Views.Level
 			this.levelData = levelData;
 			this.eventDispatcher = eventDispatcher;
 			moveCommandProvider.OnMove += HandleMove;
-			postMoveLevelView.Process(levelData, null, level);
+			PostMoveLevelView.Process(levelData, null, level);
 		}
 
 		private void HandleMove(IEnumerable<MoveNotification> moveNotifications, Action onCompleteCallback)
@@ -45,7 +45,7 @@ namespace Zenkoban.Runtime.Views.Level
 
 		private void OnMoveEnded(Action callback)
 		{
-			postMoveLevelView.Process(levelData, callback, level);
+			PostMoveLevelView.Process(levelData, callback, level);
 		}
 
 		private Vector3 GetMoveToPosition(Vector3 current, MoveDirection direction)

@@ -5,7 +5,7 @@ namespace Zenkoban.Runtime.Views.Level.PostMove
 {
 	public class PostMoveLevelView
 	{
-		public void Process(Data.Levels.Level level, Action onComplete, InstantiatedLevelView levelInstance)
+		public static void Process(Data.Levels.Level level, Action onComplete, InstantiatedLevelView levelInstance)
 		{
 			var gameBlocksOnGoal = levelInstance.BlocksOnGoals(level);
 			var gameBlocksNotOnGoal = levelInstance.BlocksNotOnGoal(level);
