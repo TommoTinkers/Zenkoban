@@ -12,7 +12,12 @@ using Zenkoban.Runtime.Views.Level.Factories;
 
 namespace Zenkoban.Runtime.Common.Mediators
 {
-	public class LevelLogicViewMediator : SerializedMonoBehaviour
+	public interface IBeginnableLevelContext
+	{
+		void Begin(Action onCompleteCallback);
+	}
+
+	public class LevelLogicViewMediator : SerializedMonoBehaviour, IBeginnableLevelContext
 	{
 		[SerializeField]
 		private ILevelTheme levelTheme = null;

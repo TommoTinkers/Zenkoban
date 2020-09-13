@@ -21,18 +21,27 @@ namespace Zenkoban.Runtime.Flow.Levels
 		{
 			currentset = levelSets.MainLevels[LevelManager.SetIndex];
 			currentLevel = LevelManager.LevelIndex;
-			PlayNextLevel();
-		}
-
-		private void HandleLevelComplete()
-		{
-			currentLevel++;
-			levelSpawner.DeSpawnLevel(currentLevelContext, PlayNextLevel);
+			PlayCurrentLevel();
 		}
 
 		private void PlayNextLevel()
 		{
-			currentLevelContext = levelSpawner.SpawnLevel(currentset[currentLevel], c => c.Begin(HandleLevelComplete));
+			currentLevel++;
+			PlayCurrentLevel();
+		}
+
+
+		private void PlayCurrentLevel() => currentLevelContext = levelSpawner.SpawnLevel(currentset[currentLevel], HandleLevelReady);
+		private void HandleLevelDespawned() => PlayNextLevel();
+
+		private void HandleLevelReady(IBeginnableLevelContext context)
+		{
+			context.Begin(HandleLevelComplete);
+		}
+
+		private void HandleLevelComplete()
+		{
+			levelSpawner.DeSpawnLevel(currentLevelContext, HandleLevelDespawned);
 		}
 	}
 }
