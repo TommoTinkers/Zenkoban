@@ -26,6 +26,7 @@ namespace Zenkoban.Runtime.Views.Level
 			this.levelData = levelData;
 			this.eventDispatcher = eventDispatcher;
 			moveCommandProvider.OnMove += HandleMove;
+			postMoveLevelView.Process(levelData, null, level);
 		}
 
 		private void HandleMove(IEnumerable<MoveNotification> moveNotifications, Action onCompleteCallback)
