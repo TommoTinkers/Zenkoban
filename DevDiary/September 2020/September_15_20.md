@@ -41,3 +41,7 @@ the menu gets deleted. I could maybe use a timeline to fix this, but in all hone
 I have committed my changes.
 
 #### Moving on to: Wiring up the 'Home' button.
+
+Home button is wired up. There is repeated scene manager code scattered about the app which
+can be brought into one place.
+I have cleaned up the "Return to main menu" repeated calls.

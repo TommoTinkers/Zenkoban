@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenkoban.Extensions.Utility.Collections;
+using Zenkoban.Runtime.Flow;
 using Zenkoban.Runtime.UI.Carousel.Movement;
 using Zenkoban.Runtime.UI.Core;
 using Zenkoban.Settings;
@@ -66,7 +67,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 			}
 			else
 			{
-				KillMenu(currentCarouselMenu, m => SceneManager.LoadScene(GameSettings.MainMenuSceneName));
+				KillMenu(currentCarouselMenu, m => SceneFlow.LoadMainMenu());
 			}
 		}
 		

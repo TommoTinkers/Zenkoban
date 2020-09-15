@@ -52,7 +52,7 @@ namespace Zenkoban.Runtime.Flow.Levels
 
 		private void ReturnHome()
 		{
-			SceneManager.LoadScene(GameSettings.MainMenuSceneName);
+			SceneFlow.LoadMainMenu();
 		}
 
 		private void PlayNextLevel()
