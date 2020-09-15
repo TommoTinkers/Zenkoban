@@ -19,3 +19,18 @@ I have added the mappings now.
 
 There is some code repetition in these input provider scripts, which could be fixed by using
 a simple inheritance.
+
+I have completed the input provider. I am going to associate it with the end of level menu.
+I have wired everything together. Now to test it!
+
+- [x] Continue works
+- [x] Replay works
+- [ ] Home button not done yet (Will do soon)
+
+#### Moving on to: Adding labels to the end of level screen
+
+These will just be basic labels for testing purposes.
+
+### Pomodoro 2 - Creating the end of level menu visual
+
+This is going to be very basic, and will be refined over time.
