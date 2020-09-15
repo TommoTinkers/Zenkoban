@@ -386,6 +386,71 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""EndOfLevel"",
+            ""id"": ""bb010f24-7d49-4e38-a902-b505e1a89fdd"",
+            ""actions"": [
+                {
+                    ""name"": ""Continue"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d793c2e-50b5-4d9a-a527-e5140c5c6707"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Replay"",
+                    ""type"": ""Button"",
+                    ""id"": ""27843854-2e3f-498b-bde8-dff2ed19d056"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Home"",
+                    ""type"": ""Button"",
+                    ""id"": ""de55ab33-0724-4dee-933e-7a62214f3cd6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a139fd35-3516-4896-a471-9d939149e3f4"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc78485f-af38-4ca9-b157-56e2a13d7a8f"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Replay"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf425f2d-a84b-45bc-a714-0ff86d5231ba"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Home"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -408,6 +473,11 @@ public class @Controls : IInputActionCollection, IDisposable
         m_LinearMenu_Down = m_LinearMenu.FindAction("Down", throwIfNotFound: true);
         m_LinearMenu_Up = m_LinearMenu.FindAction("Up", throwIfNotFound: true);
         m_LinearMenu_Select = m_LinearMenu.FindAction("Select", throwIfNotFound: true);
+        // EndOfLevel
+        m_EndOfLevel = asset.FindActionMap("EndOfLevel", throwIfNotFound: true);
+        m_EndOfLevel_Continue = m_EndOfLevel.FindAction("Continue", throwIfNotFound: true);
+        m_EndOfLevel_Replay = m_EndOfLevel.FindAction("Replay", throwIfNotFound: true);
+        m_EndOfLevel_Home = m_EndOfLevel.FindAction("Home", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -624,6 +694,55 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public LinearMenuActions @LinearMenu => new LinearMenuActions(this);
+
+    // EndOfLevel
+    private readonly InputActionMap m_EndOfLevel;
+    private IEndOfLevelActions m_EndOfLevelActionsCallbackInterface;
+    private readonly InputAction m_EndOfLevel_Continue;
+    private readonly InputAction m_EndOfLevel_Replay;
+    private readonly InputAction m_EndOfLevel_Home;
+    public struct EndOfLevelActions
+    {
+        private @Controls m_Wrapper;
+        public EndOfLevelActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Continue => m_Wrapper.m_EndOfLevel_Continue;
+        public InputAction @Replay => m_Wrapper.m_EndOfLevel_Replay;
+        public InputAction @Home => m_Wrapper.m_EndOfLevel_Home;
+        public InputActionMap Get() { return m_Wrapper.m_EndOfLevel; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EndOfLevelActions set) { return set.Get(); }
+        public void SetCallbacks(IEndOfLevelActions instance)
+        {
+            if (m_Wrapper.m_EndOfLevelActionsCallbackInterface != null)
+            {
+                @Continue.started -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnContinue;
+                @Continue.performed -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnContinue;
+                @Continue.canceled -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnContinue;
+                @Replay.started -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnReplay;
+                @Replay.performed -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnReplay;
+                @Replay.canceled -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnReplay;
+                @Home.started -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnHome;
+                @Home.performed -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnHome;
+                @Home.canceled -= m_Wrapper.m_EndOfLevelActionsCallbackInterface.OnHome;
+            }
+            m_Wrapper.m_EndOfLevelActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Continue.started += instance.OnContinue;
+                @Continue.performed += instance.OnContinue;
+                @Continue.canceled += instance.OnContinue;
+                @Replay.started += instance.OnReplay;
+                @Replay.performed += instance.OnReplay;
+                @Replay.canceled += instance.OnReplay;
+                @Home.started += instance.OnHome;
+                @Home.performed += instance.OnHome;
+                @Home.canceled += instance.OnHome;
+            }
+        }
+    }
+    public EndOfLevelActions @EndOfLevel => new EndOfLevelActions(this);
     public interface IInGameActions
     {
         void OnMoveUp(InputAction.CallbackContext context);
@@ -644,5 +763,11 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnDown(InputAction.CallbackContext context);
         void OnUp(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+    }
+    public interface IEndOfLevelActions
+    {
+        void OnContinue(InputAction.CallbackContext context);
+        void OnReplay(InputAction.CallbackContext context);
+        void OnHome(InputAction.CallbackContext context);
     }
 }

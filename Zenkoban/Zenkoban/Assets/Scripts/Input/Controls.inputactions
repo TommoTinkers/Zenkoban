@@ -373,6 +373,71 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "EndOfLevel",
+            "id": "bb010f24-7d49-4e38-a902-b505e1a89fdd",
+            "actions": [
+                {
+                    "name": "Continue",
+                    "type": "Button",
+                    "id": "7d793c2e-50b5-4d9a-a527-e5140c5c6707",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Replay",
+                    "type": "Button",
+                    "id": "27843854-2e3f-498b-bde8-dff2ed19d056",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Home",
+                    "type": "Button",
+                    "id": "de55ab33-0724-4dee-933e-7a62214f3cd6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a139fd35-3516-4896-a471-9d939149e3f4",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc78485f-af38-4ca9-b157-56e2a13d7a8f",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Replay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf425f2d-a84b-45bc-a714-0ff86d5231ba",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Home",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
