@@ -4,5 +4,6 @@ namespace Zenkoban.Runtime.Flow.Levels.EndOfLevel
 	{
 		Repeat,
 		Next,
+		Home
 	}
 }

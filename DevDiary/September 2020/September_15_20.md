@@ -34,3 +34,10 @@ These will just be basic labels for testing purposes.
 ### Pomodoro 2 - Creating the end of level menu visual
 
 This is going to be very basic, and will be refined over time.
+I'm going to add in some simple transitions.
+I cannot quite do the closing transition that I want because as soon as the event is invoked,
+the menu gets deleted. I could maybe use a timeline to fix this, but in all honesty, I think it will be fine.
+
+I have committed my changes.
+
+#### Moving on to: Wiring up the 'Home' button.

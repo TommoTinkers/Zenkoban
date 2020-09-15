@@ -24,6 +24,7 @@ namespace Zenkoban.Runtime.UI.EndOfLevel
 			canvasGroup.DOFade(1f, 0.4f).Play();
 			inputProvider.OnContinue += CreateUserChoiceHandler(EndOfLevelChoice.Next);
 			inputProvider.OnReplay += CreateUserChoiceHandler(EndOfLevelChoice.Repeat);
+			inputProvider.OnHome += CreateUserChoiceHandler(EndOfLevelChoice.Home);
 		}
 
 		private Action CreateUserChoiceHandler(EndOfLevelChoice choice)

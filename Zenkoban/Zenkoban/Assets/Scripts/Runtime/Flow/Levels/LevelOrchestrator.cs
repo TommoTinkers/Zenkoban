@@ -1,9 +1,11 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenkoban.Assets.Flow.Levels;
 using Zenkoban.Runtime.Common.Mediators;
 using Zenkoban.Runtime.Flow.Levels.EndOfLevel;
+using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.Flow.Levels
 {
@@ -40,9 +42,17 @@ namespace Zenkoban.Runtime.Flow.Levels
 				case EndOfLevelChoice.Next:
 					DespawnLevel(PlayNextLevel);
 					break;
+				case EndOfLevelChoice.Home:
+					DespawnLevel(ReturnHome);
+					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+		}
+
+		private void ReturnHome()
+		{
+			SceneManager.LoadScene(GameSettings.MainMenuSceneName);
 		}
 
 		private void PlayNextLevel()
