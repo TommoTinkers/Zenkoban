@@ -8,6 +8,7 @@ using Zenkoban.Extensions.Utility.Collections;
 using Zenkoban.Input.Movement;
 using Zenkoban.Runtime.UI.Core;
 using Zenkoban.Settings;
+using Zenkoban.Utils.Combinators;
 
 namespace Zenkoban.Runtime.UI.Carousel
 {
@@ -37,22 +38,14 @@ namespace Zenkoban.Runtime.UI.Carousel
 		
 		private void Start()
 		{
+			var IfMenuEnabledThen = Combinators.If(() => menuEnabled);
+
 			inputProvider.OnCycleLeft += IfMenuEnabledThen(CycleLeft);
 			inputProvider.OnCycleRight += IfMenuEnabledThen(CycleRight);
 			inputProvider.OnSelect += IfMenuEnabledThen(HandleSelection);
 			inputProvider.OnBack += IfMenuEnabledThen(HandleUserGoingBack);
 		}
 
-		private Action IfMenuEnabledThen(Action action)
-		{
-			return () =>
-			{
-				if (menuEnabled)
-				{
-					action?.Invoke();
-				}
-			};
-		}
 
 		private void HandleUserGoingBack()
 		{

@@ -9,5 +9,6 @@ namespace Zenkoban.Input.Movement
 		event Action OnMoveUp;
 		event Action OnMoveDown;
 		event Action OnUndo;
+		event Action OnMenu;
 	}
 }

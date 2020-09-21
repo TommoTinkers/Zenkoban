@@ -9,15 +9,11 @@ using Zenkoban.Runtime.Events.InGameEvents;
 using Zenkoban.Runtime.Logic;
 using Zenkoban.Runtime.Views.Level;
 using Zenkoban.Runtime.Views.Level.Factories;
+using Zenkoban.Utils.Combinators;
 
 namespace Zenkoban.Runtime.Common.Mediators
 {
-	public interface IBeginnableLevelContext
-	{
-		void Begin(Action onCompleteCallback);
-	}
-
-	public class LevelLogicViewMediator : SerializedMonoBehaviour, IBeginnableLevelContext
+	public class LevelLogicViewMediator : SerializedMonoBehaviour, IBeginnableLevelContext, IActivatable
 	{
 		[SerializeField]
 		private ILevelTheme levelTheme = null;
@@ -29,6 +25,8 @@ namespace Zenkoban.Runtime.Common.Mediators
 		private PlayableDirector endOfLevelTimeline = null;
 		
 		private LevelLogicProcessor logicProcessor;
+
+		private bool isActive = true;
 		
 		public void Initialise(Level level)
 		{
@@ -40,16 +38,22 @@ namespace Zenkoban.Runtime.Common.Mediators
 
 		public void Begin(Action onCompleteCallback)
 		{
-			movementInputProvider.OnMoveUp += MoveUp;
-			movementInputProvider.OnMoveDown += MoveDown;
-			movementInputProvider.OnMoveLeft += MoveLeft;
-			movementInputProvider.OnMoveRight += MoveRight;
-			movementInputProvider.OnUndo += Undo;
-
+			SubscribeToControls();
 			endOfLevelTimeline.stopped += d => onCompleteCallback();
 			logicProcessor.OnLevelComplete += endOfLevelTimeline.Play;
 		}
-		
+
+		private void SubscribeToControls()
+		{
+			var WhenActiveDo = Combinators.If(() => isActive);
+
+			movementInputProvider.OnMoveUp += WhenActiveDo(MoveUp);
+			movementInputProvider.OnMoveDown += WhenActiveDo(MoveDown);
+			movementInputProvider.OnMoveLeft += WhenActiveDo(MoveLeft);
+			movementInputProvider.OnMoveRight += WhenActiveDo(MoveRight);
+			movementInputProvider.OnUndo += WhenActiveDo(Undo);
+		}
+
 		private void MoveUp()
 		{
 			logicProcessor.Move(MoveDirection.Up);
@@ -74,5 +78,8 @@ namespace Zenkoban.Runtime.Common.Mediators
 		{
 			logicProcessor.Undo();
 		}
+
+		public void SetActive() => isActive = true;
+		public void SetInactive() => isActive = false;
 	}
 }

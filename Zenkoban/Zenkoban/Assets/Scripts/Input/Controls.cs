@@ -57,6 +57,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""219f3a15-8551-43a2-9ce6-392c213eb63f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -167,6 +175,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Undo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1bea465-a294-4873-b698-3d4bc27b1d2f"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d4d2f4b-b19d-4066-9a29-c333065f2d2e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -462,6 +492,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_InGame_MoveLeft = m_InGame.FindAction("MoveLeft", throwIfNotFound: true);
         m_InGame_MoveRight = m_InGame.FindAction("MoveRight", throwIfNotFound: true);
         m_InGame_Undo = m_InGame.FindAction("Undo", throwIfNotFound: true);
+        m_InGame_Menu = m_InGame.FindAction("Menu", throwIfNotFound: true);
         // Carousel
         m_Carousel = asset.FindActionMap("Carousel", throwIfNotFound: true);
         m_Carousel_CycleLeft = m_Carousel.FindAction("CycleLeft", throwIfNotFound: true);
@@ -532,6 +563,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_InGame_MoveLeft;
     private readonly InputAction m_InGame_MoveRight;
     private readonly InputAction m_InGame_Undo;
+    private readonly InputAction m_InGame_Menu;
     public struct InGameActions
     {
         private @Controls m_Wrapper;
@@ -541,6 +573,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @MoveLeft => m_Wrapper.m_InGame_MoveLeft;
         public InputAction @MoveRight => m_Wrapper.m_InGame_MoveRight;
         public InputAction @Undo => m_Wrapper.m_InGame_Undo;
+        public InputAction @Menu => m_Wrapper.m_InGame_Menu;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -565,6 +598,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Undo.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnUndo;
                 @Undo.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnUndo;
                 @Undo.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnUndo;
+                @Menu.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -584,6 +620,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Undo.started += instance.OnUndo;
                 @Undo.performed += instance.OnUndo;
                 @Undo.canceled += instance.OnUndo;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -750,6 +789,7 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
         void OnUndo(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
     public interface ICarouselActions
     {

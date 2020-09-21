@@ -10,6 +10,7 @@ namespace Zenkoban.Input.Movement
 		public event Action OnMoveUp;
 		public event Action OnMoveDown;
 		public event Action OnUndo;
+		public event Action OnMenu;
 		
 		private Controls controls;
 		
@@ -21,6 +22,7 @@ namespace Zenkoban.Input.Movement
 			controls.InGame.MoveUp.performed += a => OnMoveUp?.Invoke();
 			controls.InGame.MoveDown.performed += a => OnMoveDown?.Invoke();
 			controls.InGame.Undo.performed += a => OnUndo?.Invoke();
+			controls.InGame.Menu.performed += a => OnMenu?.Invoke();
 		}
 
 		private void OnEnable()
