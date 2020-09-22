@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenkoban.Input.Movement;
 using Zenkoban.Runtime.Common.Mediators;
+using Zenkoban.Settings;
 using Zenkoban.Utils;
 using Zenkoban.Utils.Combinators;
 
@@ -60,14 +61,14 @@ namespace Zenkoban.Runtime.UI.LinearMenu
 
 		public void SetActive()
 		{
-			var anim = canvasGroup.DOFade(1f, 1f);
+			var anim = canvasGroup.DOFade(1f, GameSettings.InGameMenuFadeDuration);
 			anim.onComplete += () => isActive = true;
 			anim.Play();
 		}
 
 		public void SetInactive()
 		{
-			var anim = canvasGroup.DOFade(0f, 1f);
+			var anim = canvasGroup.DOFade(0f, GameSettings.InGameMenuFadeDuration);
 			isActive = false;
 			anim.Play();
 		}

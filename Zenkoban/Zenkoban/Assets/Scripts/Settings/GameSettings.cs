@@ -22,6 +22,8 @@
 		public const int TotalLevelsPerSet = StandardLevelsPerSet + BonusLevelsPerSet;
 
 
+		public const float InGameMenuFadeDuration = 0.5f;
+		
 		public const string MainMenuSceneName = "MainMenu";
 		public const string GameSceneName = "Main";
 		public const string CarouselSceneName = "Carousel";
