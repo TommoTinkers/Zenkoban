@@ -9,5 +9,10 @@ namespace Zenkoban.Runtime.Flow
 		{
 			SceneManager.LoadScene(GameSettings.MainMenuSceneName);
 		}
+
+		public static void LoadLevelSelect()
+		{
+			SceneManager.LoadScene(GameSettings.CarouselSceneName);
+		}
 	}
 }

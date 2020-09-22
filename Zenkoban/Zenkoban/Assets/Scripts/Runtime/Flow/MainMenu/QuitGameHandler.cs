@@ -4,9 +4,6 @@ namespace Zenkoban.Runtime.Flow.MainMenu
 {
 	public class QuitGameHandler : MonoBehaviour
 	{
-		public void QuitGame()
-		{
-			Application.Quit();
-		}
+		public void QuitGame() => Application.Quit();
 	}
 }
