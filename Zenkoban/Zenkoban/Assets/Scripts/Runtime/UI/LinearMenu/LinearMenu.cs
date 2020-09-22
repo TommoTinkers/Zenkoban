@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenkoban.Input.Movement;
@@ -12,6 +13,9 @@ namespace Zenkoban.Runtime.UI.LinearMenu
 		[SerializeField] private ILinearMenuButton[] buttons = null;
 		[SerializeField] private ILinearMenuInputProvider inputProvider = null;
 
+		[SerializeField]
+		private CanvasGroup canvasGroup = null;
+		
 		private IndexCycler currentButtonIndex;
 		private bool isActive = true;
 
@@ -56,12 +60,16 @@ namespace Zenkoban.Runtime.UI.LinearMenu
 
 		public void SetActive()
 		{
-			isActive = true;
+			var anim = canvasGroup.DOFade(1f, 1f);
+			anim.onComplete += () => isActive = true;
+			anim.Play();
 		}
 
 		public void SetInactive()
 		{
+			var anim = canvasGroup.DOFade(0f, 1f);
 			isActive = false;
+			anim.Play();
 		}
 	}
 }
