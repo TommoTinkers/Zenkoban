@@ -2,6 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenkoban.Assets.Flow.Levels;
+using Zenkoban.Assets.Levels;
 using Zenkoban.Runtime.Common.Mediators;
 using Zenkoban.Runtime.Flow.Levels.EndOfLevel;
 
@@ -19,14 +20,12 @@ namespace Zenkoban.Runtime.Flow.Levels
 		private IEndOfLevelChoiceProvider endOfLevelChoiceProvider = null;
 
 		private LevelLogicViewMediator currentLevelContext;
-
-		private LevelSet currentset;
-		private int currentLevel;
-
+		
+		private LevelProvider levelProvider;
+		
 		private void Awake()
 		{
-			currentset = levelSets.MainLevels[LevelManager.SetIndex];
-			currentLevel = LevelManager.LevelIndex;
+			levelProvider = new LevelProvider(LevelManager.SetIndex, LevelManager.LevelIndex, levelSets);
 			PlayCurrentLevel();
 		}
 		
@@ -55,14 +54,31 @@ namespace Zenkoban.Runtime.Flow.Levels
 
 		private void PlayNextLevel()
 		{
-			currentLevel++;
 			PlayCurrentLevel();
 		}
 
-		private void PlayCurrentLevel() => currentLevelContext = levelSpawner.SpawnLevel(currentset[currentLevel], BeginLevel);
+		private void PlayLevel(ILevelAsset level) => currentLevelContext = levelSpawner.SpawnLevel(level, BeginLevel);
+		private void PlayCurrentLevel() => PlayLevel(levelProvider.CurrentLevel);
 		
 		private void DespawnLevel(Action then) => levelSpawner.DeSpawnLevel(currentLevelContext, then);
-		private void BeginLevel(IBeginnableLevelContext context) => context.Begin(GetEndOfLevelPlayerChoice);
-		private void GetEndOfLevelPlayerChoice() => endOfLevelChoiceProvider.GetChoice(HandlePlayerChoiceMade);
+		private void BeginLevel(IBeginnableLevelContext context) => context.Begin(HandleLevelCompleted);
+		
+		private void HandleLevelCompleted()
+		{
+			switch(levelProvider.Cycle())
+			{
+				case LevelCycleEvent.Ok:
+					endOfLevelChoiceProvider.GetChoice(HandlePlayerChoiceMade);
+					break;
+				case LevelCycleEvent.Ok_EndOfSet:
+					Debug.Log("End of set");
+					endOfLevelChoiceProvider.GetChoice(HandlePlayerChoiceMade);
+					break;
+				case LevelCycleEvent.Ok_EndOfGame:
+					Debug.Log("End of game");
+					ReturnHome();
+					break;
+			}
+		}
 	}
 }

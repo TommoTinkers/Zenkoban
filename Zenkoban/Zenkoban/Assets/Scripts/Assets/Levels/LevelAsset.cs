@@ -20,8 +20,9 @@ namespace Zenkoban.Assets.Levels
 		public LevelSize Size => size;
 
 		private LevelSize size => new LevelSize(tiles.GetLength(0), tiles.GetLength(1));
-	
 
+		[SerializeField]
+		private Guid Id = Guid.NewGuid();
 
 		#region Editor
 		
