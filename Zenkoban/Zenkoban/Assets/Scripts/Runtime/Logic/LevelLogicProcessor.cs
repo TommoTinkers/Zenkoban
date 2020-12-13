@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UIElements;
+using Zenkoban.Data.Levels;
 using Zenkoban.Runtime.Common;
 using Zenkoban.Runtime.Data.Levels;
 using Zenkoban.Runtime.Data.Movement;
+using Zenkoban.Runtime.Extensions;
 using Zenkoban.Runtime.Extensions.Level;
 
 namespace Zenkoban.Runtime.Logic
@@ -36,10 +39,9 @@ namespace Zenkoban.Runtime.Logic
 			var playerPos = level.FindPlayer();
 			var playerDest = playerPos + direction;
 			
-			if (level[playerDest].Type == BlockType.Block)
-			{
-				sequencer.SequenceMove(playerDest, playerDest + direction, direction);
-			}
+			HandleBlockPush(direction, playerDest, sequencer);
+
+			HandleMirrorBlockPush(direction, playerDest, sequencer);
 			
 			sequencer.SequenceMove(playerPos, playerDest, direction);
 
@@ -50,13 +52,38 @@ namespace Zenkoban.Runtime.Logic
 			forward();
 		}
 
+		private void HandleMirrorBlockPush(MoveDirection direction, LevelPoint playerDest, MoveSequencer sequencer)
+		{
+			if (level[playerDest].Type != BlockType.MirrorBlock) return;
+			sequencer.SequenceMove(playerDest, playerDest + direction, direction);
+			var allOtherMirrorBlocks = level.AllOtherMirrorBlocks(level[playerDest])
+				.Select(m => level.FindBlock(m));
+			foreach (var mirrorBlock in allOtherMirrorBlocks)
+			{
+				var mirrorDirection = direction.Invert();
+
+				var destPoint = mirrorBlock + mirrorDirection;
+				if (level.IsNone(destPoint))
+				{
+					sequencer.SequenceMove(mirrorBlock, mirrorBlock + mirrorDirection, mirrorDirection);
+				}
+			}
+		}
+
+		private void HandleBlockPush(MoveDirection direction, LevelPoint playerDest, MoveSequencer sequencer)
+		{
+			if (level[playerDest].Type == BlockType.Block)
+			{
+				sequencer.SequenceMove(playerDest, playerDest + direction, direction);
+			}
+		}
+
 		public void Undo()
 		{
-			if (undoStack.Any() && !isMoving)
-			{
-				isMoving = true;
-				undoStack.Pop()();
-			}
+			if (!undoStack.Any() || isMoving) return;
+			
+			isMoving = true;
+			undoStack.Pop()();
 		}
 		
 		private void HandleMoveComplete()

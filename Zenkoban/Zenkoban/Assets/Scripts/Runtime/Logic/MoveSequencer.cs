@@ -12,17 +12,24 @@ namespace Zenkoban.Runtime.Logic
 	{
 		private Level level;
 		private List<ValueTuple<Func<MoveNotification>, Func<MoveNotification>>> moveFunctionPairs;
+		private bool[,] reservations;
 
 		public MoveSequencer(Level level)
 		{
 			this.level = level;
-			
+			reservations = new bool[level.Size.Width, level.Size.Height];
 			moveFunctionPairs = new List<(Func<MoveNotification>, Func<MoveNotification>)>();
 		}
 
 		public void SequenceMove(LevelPoint from, LevelPoint to, MoveDirection direction)
 		{
+			if (reservations[to.X, to.Y])
+			{
+				return;
+			}
+			
 			var functionPair = GenerateMovePair(from, to, direction);
+			reservations[to.X, to.Y] = true;
 			moveFunctionPairs.Add(functionPair);
 		}
 		

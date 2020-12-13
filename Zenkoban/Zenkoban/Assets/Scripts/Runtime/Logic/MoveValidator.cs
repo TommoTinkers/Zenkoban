@@ -14,7 +14,8 @@ namespace Zenkoban.Runtime.Logic
 		private readonly List<IPlayerMoveValidatorRule> PlayerMoveValidatorRules = new List<IPlayerMoveValidatorRule>
 		{
 			new PlayerWallRule(),
-			new PlayerBlockRule()
+			new PlayerBlockRule(BlockType.Block),
+			new PlayerBlockRule(BlockType.MirrorBlock)
 		};
 		
 		public MoveValidator(Level level)

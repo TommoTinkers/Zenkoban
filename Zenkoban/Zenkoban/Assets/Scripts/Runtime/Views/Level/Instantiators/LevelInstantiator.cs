@@ -44,6 +44,9 @@ namespace Zenkoban.Runtime.Views.Level.Instantiators
 						case BlockType.Block:
 							prefab = levelTheme.Block;
 							break;
+						case BlockType.MirrorBlock:
+							prefab = levelTheme.MirrorBlock;
+							break;
 						case BlockType.Wall:
 							prefab = levelTheme.Wall;
 							break;

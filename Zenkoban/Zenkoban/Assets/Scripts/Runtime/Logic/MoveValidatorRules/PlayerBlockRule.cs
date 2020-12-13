@@ -6,14 +6,21 @@ namespace Zenkoban.Runtime.Logic.MoveValidatorRules
 {
 	internal class PlayerBlockRule : IPlayerMoveValidatorRule
 	{
+		private readonly BlockType blockType;
+
+		public PlayerBlockRule(BlockType blockType)
+		{
+			this.blockType = blockType;
+		}
+
 		public bool Validate(Level level, LevelPoint destination, MoveDirection direction)
 		{
-			if (level[destination].Type == BlockType.None)
+			if (level[destination].Type != blockType)
 			{
 				return true;
 			}
 			
-			return level[destination].Type == BlockType.Block && level[destination + direction ].Type == BlockType.None;
+			return level[destination].Type == blockType && level[destination + direction ].Type == BlockType.None;
 		}
 	}
 }

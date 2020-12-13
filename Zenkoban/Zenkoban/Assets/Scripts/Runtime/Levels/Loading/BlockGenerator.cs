@@ -15,7 +15,8 @@ namespace Zenkoban.Runtime.Levels.Loading
 			{TileType.Block, BlockType.Block},
 			{TileType.Player, BlockType.Player},
 			{TileType.Wall, BlockType.Wall},
-			{TileType.BlockOnGoal, BlockType.Block}
+			{TileType.BlockOnGoal, BlockType.Block},
+			{TileType.MirrorBlock, BlockType.MirrorBlock}
 		};
 		
 		public Block[,] Generate(ILevelAsset level)

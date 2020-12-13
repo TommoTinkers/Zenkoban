@@ -6,5 +6,6 @@ namespace Zenkoban.Runtime.Data.Levels
 		Player,
 		Block,
 		Wall,
+		MirrorBlock
 	}
 }

@@ -28,3 +28,5 @@ MonoBehaviour:
   - {fileID: 8496443402855469934, guid: 45cb938a1ac924540a49e11b59cd0573, type: 3}
   goal: {fileID: 8496443402855469934, guid: 51c50fd97d2c5da49a7c96870128aed3, type: 3}
   wall: {fileID: -8190958063786148707, guid: 5b5c9016618c2264da0f33536c3006b6, type: 3}
+  mirrorBlock: {fileID: -1403744996928170531, guid: fc3ee25976679e544805eaf1ac152ed8,
+    type: 3}

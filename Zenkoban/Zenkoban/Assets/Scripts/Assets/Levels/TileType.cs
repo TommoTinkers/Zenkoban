@@ -8,6 +8,7 @@ namespace Zenkoban.Assets.Levels
 		Block,
 		Player,
 		Goal,
-		BlockOnGoal
+		BlockOnGoal,
+		MirrorBlock
 	}
 }

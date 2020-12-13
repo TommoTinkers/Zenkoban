@@ -16,6 +16,8 @@ namespace Zenkoban.Runtime.Views.Level
 
 		public GameBlock Wall => wall;
 
+		public GameBlock MirrorBlock => mirrorBlock;
+
 		public GameObject[] Floor => floor;
 
 		[SerializeField]
@@ -33,6 +35,8 @@ namespace Zenkoban.Runtime.Views.Level
 		[SerializeField]
 		private GameBlock wall = null;
 
+		[SerializeField]
+		private GameBlock mirrorBlock = null;
 
 	}
 }
