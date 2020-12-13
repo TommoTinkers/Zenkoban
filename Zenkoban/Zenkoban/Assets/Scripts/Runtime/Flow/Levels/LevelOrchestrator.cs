@@ -1,11 +1,9 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenkoban.Assets.Flow.Levels;
 using Zenkoban.Runtime.Common.Mediators;
 using Zenkoban.Runtime.Flow.Levels.EndOfLevel;
-using Zenkoban.Settings;
 
 namespace Zenkoban.Runtime.Flow.Levels
 {
@@ -50,7 +48,7 @@ namespace Zenkoban.Runtime.Flow.Levels
 			}
 		}
 
-		private void ReturnHome()
+		private static void ReturnHome()
 		{
 			SceneFlow.LoadMainMenu();
 		}
@@ -61,10 +59,8 @@ namespace Zenkoban.Runtime.Flow.Levels
 			PlayCurrentLevel();
 		}
 
-		private void PlayCurrentLevel() =>
-			currentLevelContext = levelSpawner.SpawnLevel(currentset[currentLevel], BeginLevel);
-
-
+		private void PlayCurrentLevel() => currentLevelContext = levelSpawner.SpawnLevel(currentset[currentLevel], BeginLevel);
+		
 		private void DespawnLevel(Action then) => levelSpawner.DeSpawnLevel(currentLevelContext, then);
 		private void BeginLevel(IBeginnableLevelContext context) => context.Begin(GetEndOfLevelPlayerChoice);
 		private void GetEndOfLevelPlayerChoice() => endOfLevelChoiceProvider.GetChoice(HandlePlayerChoiceMade);

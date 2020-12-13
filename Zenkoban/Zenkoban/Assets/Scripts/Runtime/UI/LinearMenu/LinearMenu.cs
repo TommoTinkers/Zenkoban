@@ -13,20 +13,20 @@ namespace Zenkoban.Runtime.UI.LinearMenu
 	{
 		[SerializeField] private ILinearMenuButton[] buttons = null;
 		[SerializeField] private ILinearMenuInputProvider inputProvider = null;
-
+		
 		[SerializeField]
 		private CanvasGroup canvasGroup = null;
 		
 		private IndexCycler currentButtonIndex;
 		private bool isActive = true;
-
+		
 		private void Awake()
 		{
-			var ProcessInputIfActive = Combinators.If(() => isActive);
+			var DoIfActive = Combinators.If(() => isActive);
 			
-			inputProvider.OnUp += ProcessInputIfActive(MoveUp);
-			inputProvider.OnDown += ProcessInputIfActive(MoveDown);
-			inputProvider.OnSelect += ProcessInputIfActive(HandleSelect);
+			inputProvider.OnUp += DoIfActive(MoveUp);
+			inputProvider.OnDown += DoIfActive(MoveDown);
+			inputProvider.OnSelect += DoIfActive(HandleSelect);
 			
 			currentButtonIndex = new IndexCycler(buttons, 0);
 			Refresh();
@@ -51,11 +51,11 @@ namespace Zenkoban.Runtime.UI.LinearMenu
 
 		private void Refresh()
 		{
-			for (var index = 0; index < buttons.Length; index++)
+			foreach (var button in buttons)
 			{
-				buttons[index].UnHighlight();
+				button.UnHighlight();
 			}
-			
+
 			buttons[currentButtonIndex].Highlight();
 		}
 

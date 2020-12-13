@@ -59,7 +59,7 @@ namespace Zenkoban.Runtime.UI.Carousel.LevelSelection
 
 		private CarouselMenu CreateLevelMenu(int index)
 		{
-			var levels = gameLevels.MainLevels[index].AllLevels();
+			var levels = gameLevels.MainLevels[index].AllLevels;
 			var panels = levels.Select(level => Instantiate(levelCarouselPanelPrefab)).ToArray();
 			
 			var menu = carouselMenuBuilder.Build(panels, 0);
