@@ -4,11 +4,11 @@ using Zenkoban.Extensions.Data.Levels;
 
 namespace Zenkoban.Assets.Flow.Levels
 {
-	public enum LevelCycleEvent
+	public enum LevelProgressionStatus
 	{
 		Ok,
-		Ok_EndOfSet,
-		Ok_EndOfGame
+		EndOfSet,
+		EndOfGame
 	}
 	
 	public class LevelProvider
@@ -26,20 +26,36 @@ namespace Zenkoban.Assets.Flow.Levels
 			this.gameLevels = gameLevels;
 		}
 
-		public LevelCycleEvent Cycle()
+		public LevelProgressionStatus GetProgressionStatus()
 		{
 			var set = gameLevels.MainLevels[currentSet];
+			var nextLevelIndex = currentLevel + 1;
 			
+			if (nextLevelIndex < set.AllLevels.Count())
+			{
+				return LevelProgressionStatus.Ok;
+			}
+
+			var nextSetIndex = currentSet + 1;
+			return nextSetIndex < gameLevels.MainLevels.Count()
+				? LevelProgressionStatus.EndOfSet
+				: LevelProgressionStatus.EndOfGame;
+
+		}
+		
+		public LevelProgressionStatus Cycle()
+		{
+			var set = gameLevels.MainLevels[currentSet];
 			currentLevel++;
 
 			if (currentLevel < set.AllLevels.Count())
 			{
-				return LevelCycleEvent.Ok;
+				return LevelProgressionStatus.Ok;
 			}
 
 			currentSet++;
 			currentLevel = 0;
-			return currentSet < gameLevels.MainLevels.Count() ? LevelCycleEvent.Ok_EndOfSet : LevelCycleEvent.Ok_EndOfGame;
+			return currentSet < gameLevels.MainLevels.Count() ? LevelProgressionStatus.EndOfSet : LevelProgressionStatus.EndOfGame;
 		}
 
 		public ILevelAsset CurrentLevel => gameLevels.MainLevels[currentSet][currentLevel];

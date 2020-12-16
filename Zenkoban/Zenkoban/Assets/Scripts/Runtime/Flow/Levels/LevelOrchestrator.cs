@@ -54,6 +54,7 @@ namespace Zenkoban.Runtime.Flow.Levels
 
 		private void PlayNextLevel()
 		{
+			levelProvider.Cycle();
 			PlayCurrentLevel();
 		}
 
@@ -65,16 +66,16 @@ namespace Zenkoban.Runtime.Flow.Levels
 		
 		private void HandleLevelCompleted()
 		{
-			switch(levelProvider.Cycle())
+			switch(levelProvider.GetProgressionStatus())
 			{
-				case LevelCycleEvent.Ok:
+				case LevelProgressionStatus.Ok:
 					endOfLevelChoiceProvider.GetChoice(HandlePlayerChoiceMade);
 					break;
-				case LevelCycleEvent.Ok_EndOfSet:
+				case LevelProgressionStatus.EndOfSet:
 					Debug.Log("End of set");
 					endOfLevelChoiceProvider.GetChoice(HandlePlayerChoiceMade);
 					break;
-				case LevelCycleEvent.Ok_EndOfGame:
+				case LevelProgressionStatus.EndOfGame:
 					Debug.Log("End of game");
 					ReturnHome();
 					break;
