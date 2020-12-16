@@ -47,7 +47,7 @@ namespace Zenkoban.Runtime.Extensions.Level
 					if (level.Tiles[x, y].Type != TileType.Goal) continue;
 					
 					var blockType = level.Blocks[x, y].Type;
-					if (blockType == BlockType.None)
+					if (blockType == BlockType.None || blockType == BlockType.Player)
 					{
 						count++;
 					}
@@ -88,7 +88,7 @@ namespace Zenkoban.Runtime.Extensions.Level
 					
 					if (tile.Type != TileType.Goal) continue;
 					
-					if (block.Type != BlockType.None)
+					if (block.Type != BlockType.None || block.Type != BlockType.Player)
 					{
 						yield return block;
 					}
