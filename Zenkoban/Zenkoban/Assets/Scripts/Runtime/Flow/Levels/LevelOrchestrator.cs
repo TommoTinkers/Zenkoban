@@ -60,7 +60,6 @@ namespace Zenkoban.Runtime.Flow.Levels
 
 		private void PlayLevel(ILevelAsset level) => currentLevelContext = levelSpawner.SpawnLevel(level, BeginLevel);
 		private void PlayCurrentLevel() => PlayLevel(levelProvider.CurrentLevel);
-		
 		private void DespawnLevel(Action then) => levelSpawner.DeSpawnLevel(currentLevelContext, then);
 		private void BeginLevel(IBeginnableLevelContext context) => context.Begin(HandleLevelCompleted);
 		
