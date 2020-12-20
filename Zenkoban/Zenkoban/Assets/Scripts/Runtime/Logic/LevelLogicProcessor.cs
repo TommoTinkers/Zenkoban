@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.UIElements;
 using Zenkoban.Data.Levels;
 using Zenkoban.Runtime.Common;
 using Zenkoban.Runtime.Data.Levels;
@@ -56,12 +55,14 @@ namespace Zenkoban.Runtime.Logic
 		{
 			if (level[playerDest].Type != BlockType.MirrorBlock) return;
 			sequencer.SequenceMove(playerDest, playerDest + direction, direction);
-			var allOtherMirrorBlocks = level.AllOtherMirrorBlocks(level[playerDest])
+			var otherMirrorBlockLocations
+			 = level.AllOtherMirrorBlocks(level[playerDest])
 				.Select(m => level.FindBlock(m));
-			foreach (var mirrorBlock in allOtherMirrorBlocks)
+			
+			var mirrorDirection = direction.Invert();
+			
+			foreach (var mirrorBlock in otherMirrorBlockLocations)
 			{
-				var mirrorDirection = direction.Invert();
-
 				var destPoint = mirrorBlock + mirrorDirection;
 				if (level.IsNone(destPoint))
 				{
