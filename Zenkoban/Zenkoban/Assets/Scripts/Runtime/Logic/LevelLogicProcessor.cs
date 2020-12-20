@@ -42,7 +42,7 @@ namespace Zenkoban.Runtime.Logic
 
 			HandleMirrorBlockPush(direction, playerDest, sequencer);
 
-			if (level[playerDest].Type == BlockType.None)
+			if (level.IsNone(playerDest))
 			{
 				playerDest = level.GetSlidePoint(playerDest, direction);
 			}
@@ -73,8 +73,8 @@ namespace Zenkoban.Runtime.Logic
 				var destPoint = mirrorBlock + mirrorDirection;
 				if (level.IsNone(destPoint))
 				{
-					var slide = level.GetSlidePoint(mirrorBlock + mirrorDirection, mirrorDirection);
-					sequencer.SequenceMove(mirrorBlock, slide);
+					destPoint = level.GetSlidePoint(mirrorBlock + mirrorDirection, mirrorDirection);
+					sequencer.SequenceMove(mirrorBlock, destPoint, mirrorDirection);
 				}
 			}
 		}

@@ -4,6 +4,7 @@ using System.Linq;
 using Zenkoban.Data.Levels;
 using Zenkoban.Runtime.Data.Levels;
 using Zenkoban.Runtime.Data.Movement;
+using Zenkoban.Runtime.Extensions;
 
 namespace Zenkoban.Runtime.Logic
 {
@@ -30,6 +31,23 @@ namespace Zenkoban.Runtime.Logic
 			var functionPair = GenerateMovePair(from, to);
 			reservations[to.X, to.Y] = true;
 			moveFunctionPairs.Add(functionPair);
+		}
+
+		public void SequenceMove(LevelPoint from, LevelPoint to, MoveDirection direction)
+		{
+			if (to == from)
+			{
+				return;
+			}
+			
+			if (reservations[to.X, to.Y])
+			{
+				SequenceMove(from, to + direction.Invert(), direction);
+			}
+			else
+			{
+				SequenceMove(from, to);
+			}
 		}
 		
 		private (Func<MoveNotification>, Func<MoveNotification>) GenerateMovePair(LevelPoint from, LevelPoint to)
