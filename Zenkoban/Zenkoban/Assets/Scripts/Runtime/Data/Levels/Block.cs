@@ -6,7 +6,7 @@ namespace Zenkoban.Runtime.Data.Levels
 	{
 		public Guid Id { get; }
 		public BlockType Type { get; }
-
+		
 		public Block(BlockType type)
 		{
 			Type = type;

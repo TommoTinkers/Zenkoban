@@ -88,7 +88,7 @@ namespace Zenkoban.Runtime.Logic
 		
 		private void HandleMoveComplete()
 		{
-			if (level.OpenGoalSquares() > 0)
+			if (level.CountOpenGoalSquares() > 0)
 			{
 				isMoving = false;
 			}

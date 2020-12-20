@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Zenkoban.Data.Levels;
 using Zenkoban.Extensions.Utility;
 using Zenkoban.Runtime.Data.Levels;
+using Zenkoban.Runtime.Extensions.Blocks;
 
 namespace Zenkoban.Runtime.Extensions.Level
 {
@@ -37,7 +39,7 @@ namespace Zenkoban.Runtime.Extensions.Level
 		public static bool IsWall(this Data.Levels.Level level, LevelPoint point) => level[point].Type == BlockType.Wall;
 		public static bool IsNone(this Data.Levels.Level level, LevelPoint point) => level[point].Type == BlockType.None;
 
-		public static int OpenGoalSquares(this Data.Levels.Level level)
+		public static int CountOpenGoalSquares(this Data.Levels.Level level)
 		{
 			var count = 0;
 			for (var x = 0; x < level.Size.Width; x++)
@@ -57,25 +59,12 @@ namespace Zenkoban.Runtime.Extensions.Level
 			return count;
 		}
 
-		public static IEnumerable<Block> AllBlocks(this Data.Levels.Level level)
+		public static IEnumerable<Block> AllPushables(this Data.Levels.Level level)
 		{
-			return level.AllBlocksOfType(BlockType.Block).Concat(level.AllBlocksOfType(BlockType.MirrorBlock));
+			return level.AllBlocks().Where(b => b.IsPushable());
 		}
-		
-		public static IEnumerable<Block> AllBlocksOfType(this Data.Levels.Level level, BlockType type)
-		{
-			for (var x = 0; x < level.Size.Width; x++)
-			{
-				for (var y = 0; y < level.Size.Height; y++)
-				{
-					var blockType = level.Blocks[x, y].Type;
-					if (blockType == type)
-					{
-						yield return level.Blocks[x, y];
-					}
-				}
-			}
-		}
+
+		public static IEnumerable<Block> AllBlocksOfType(this Data.Levels.Level level, BlockType type) => level.AllBlocks().Where(b => b.Type == type);
 
 		public static IEnumerable<Block> BlocksOnGoals(this Data.Levels.Level level)
 		{
@@ -99,6 +88,21 @@ namespace Zenkoban.Runtime.Extensions.Level
 		public static IEnumerable<Block> AllOtherMirrorBlocks(this Data.Levels.Level level, Block block)
 		{
 			return level.AllBlocksOfType(BlockType.MirrorBlock).Except(new []{ block });
+		}
+
+		public static IEnumerable<Block> AllBlocks(this Data.Levels.Level level)
+		{
+			for (var x = 0; x < level.Size.Width; x++)
+			{
+				for (var y = 0; y < level.Size.Height; y++)
+				{
+					var block = level.Blocks[x, y];
+					if (block.Type != BlockType.None)
+					{
+						yield return block;
+					}
+				}
+			}
 		}
 	}
 }

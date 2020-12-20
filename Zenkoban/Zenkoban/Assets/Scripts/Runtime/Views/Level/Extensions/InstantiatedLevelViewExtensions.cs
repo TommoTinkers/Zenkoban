@@ -17,7 +17,7 @@ namespace Zenkoban.Runtime.Views.Level.Extensions
 
 		public static IEnumerable<ColorableGoalBlock> BlocksNotOnGoal(this InstantiatedLevelView levelInstance, Data.Levels.Level level)
 		{
-			var blocksNotOnGoal = level.AllBlocks().Except(level.BlocksOnGoals());
+			var blocksNotOnGoal = level.AllPushables().Except(level.BlocksOnGoals());
 			return levelInstance.FindBlocksById(blocksNotOnGoal);
 		}
 		
