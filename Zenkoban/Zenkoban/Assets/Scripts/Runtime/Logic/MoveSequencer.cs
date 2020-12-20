@@ -4,16 +4,15 @@ using System.Linq;
 using Zenkoban.Data.Levels;
 using Zenkoban.Runtime.Data.Levels;
 using Zenkoban.Runtime.Data.Movement;
-using Zenkoban.Runtime.Extensions;
 
 namespace Zenkoban.Runtime.Logic
 {
 	public class MoveSequencer
 	{
-		private Level level;
-		private List<ValueTuple<Func<MoveNotification>, Func<MoveNotification>>> moveFunctionPairs;
-		private bool[,] reservations;
-
+		private readonly Level level;
+		private readonly List<ValueTuple<Func<MoveNotification>, Func<MoveNotification>>> moveFunctionPairs;
+		private readonly bool[,] reservations;
+		
 		public MoveSequencer(Level level)
 		{
 			this.level = level;
@@ -21,30 +20,31 @@ namespace Zenkoban.Runtime.Logic
 			moveFunctionPairs = new List<(Func<MoveNotification>, Func<MoveNotification>)>();
 		}
 
-		public void SequenceMove(LevelPoint from, LevelPoint to, MoveDirection direction)
+		public void SequenceMove(LevelPoint from, LevelPoint to)
 		{
 			if (reservations[to.X, to.Y])
 			{
 				return;
 			}
 			
-			var functionPair = GenerateMovePair(from, to, direction);
+			var functionPair = GenerateMovePair(from, to);
 			reservations[to.X, to.Y] = true;
 			moveFunctionPairs.Add(functionPair);
 		}
 		
-		private (Func<MoveNotification>, Func<MoveNotification>) GenerateMovePair(LevelPoint from, LevelPoint to, MoveDirection direction)
+		private (Func<MoveNotification>, Func<MoveNotification>) GenerateMovePair(LevelPoint from, LevelPoint to)
 		{
-			var doFunc = GenerateMoveFunction(from, to, direction);
-			var undoFunc = GenerateMoveFunction(to, from, direction.Invert());
+			var doFunc = GenerateMoveFunction(from, to);
+			var undoFunc = GenerateMoveFunction(to, from);
 			return (doFunc, undoFunc);
 		}
 		
-		private Func<MoveNotification> GenerateMoveFunction(LevelPoint from, LevelPoint to, MoveDirection direction)
+		private Func<MoveNotification> GenerateMoveFunction(LevelPoint from, LevelPoint to)
 		{
 			return () =>
 			{
-				var notification = new MoveNotification(level[from].Id, direction);
+				var delta = to - from;
+				var notification = new MoveNotification(level[from].Id, delta);
 				level.Swap(from, to);
 				return notification;
 			};

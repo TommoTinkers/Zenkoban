@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenkoban.Data.Levels;
 using Zenkoban.Runtime.Common;
 using Zenkoban.Runtime.Data.Movement;
 using Zenkoban.Runtime.Events;
@@ -36,7 +37,7 @@ namespace Zenkoban.Runtime.Views.Level
 			foreach (var move in moveNotifications)
 			{
 				var block = level.Blocks[move.Id];
-				mover.Move(block.gameObject,GetMoveToPosition(block.transform.position, move.Direction));
+				mover.Move(block.gameObject,GetMoveToPosition(block.transform.position, move.Delta));
 				eventDispatcher.Publish(InGameEvent.PlayerMoved);
 			}
 			
@@ -48,21 +49,11 @@ namespace Zenkoban.Runtime.Views.Level
 			PostMoveLevelView.Process(levelData, callback, level);
 		}
 
-		private Vector3 GetMoveToPosition(Vector3 current, MoveDirection direction)
+		private Vector3 GetMoveToPosition(Vector3 current, LevelPoint delta)
 		{
-			switch(direction)
-			{
-				case MoveDirection.Left:
-					return current + Vector3.left * GameSettings.TileSize;
-				case MoveDirection.Up:
-					return current + Vector3.forward * GameSettings.TileSize;
-				case MoveDirection.Right:
-					return current + Vector3.right * GameSettings.TileSize;
-				case MoveDirection.Down:
-					return current + Vector3.back * GameSettings.TileSize;
-				default:
-					throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-			}
+			var x = Vector3.right * GameSettings.TileSize * delta.X;
+			var z = Vector3.forward * GameSettings.TileSize * delta.Y;
+			return x + z + current;
 		}
 	}
 }

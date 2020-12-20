@@ -31,5 +31,15 @@ namespace Zenkoban.Data.Levels
 		{
 			return left + offsets[direction];
 		}
+
+		public static LevelPoint operator -(LevelPoint left, LevelPoint right)
+		{
+			return new LevelPoint(left.X - right.X, left.Y - right.Y);
+		}
+
+		public override string ToString()
+		{
+			return $"X: {X} Y: {Y}";
+		}
 	}
 }

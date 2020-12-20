@@ -66,5 +66,10 @@ namespace Zenkoban.Runtime.Data.Levels
 			this[a] = this[b];
 			this[b] = temp;
 		}
+
+		public Tile TileAt(LevelPoint p)
+		{
+			return Tiles[p.X, p.Y];
+		}
 	}
 }
