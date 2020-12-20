@@ -35,6 +35,12 @@ namespace Zenkoban.Runtime.Views.Level.Instantiators
 						goal.transform.SetParent(parent, true);
 					}
 
+					if (tile.Type == TileType.Ice)
+					{
+						var ice = Object.Instantiate(levelTheme.IceFloor, position, Quaternion.identity);
+						ice.transform.SetParent(parent, true);
+					}
+
 					GameBlock prefab = null;
 					switch(block.Type)
 					{

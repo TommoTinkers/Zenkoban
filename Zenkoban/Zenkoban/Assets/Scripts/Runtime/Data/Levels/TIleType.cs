@@ -4,6 +4,7 @@ namespace Zenkoban.Runtime.Data.Levels
 	{
 		Empty,
 		Floor,
-		Goal
+		Goal,
+		Ice
 	}
 }

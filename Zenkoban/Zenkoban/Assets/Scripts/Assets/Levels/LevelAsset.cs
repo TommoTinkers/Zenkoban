@@ -66,6 +66,10 @@ namespace Zenkoban.Assets.Levels
 				case TileType.MirrorBlock:
 					color = Color.blue;
 					break;
+				
+				case TileType.Ice:
+					color = Color.magenta;
+					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
@@ -81,6 +85,11 @@ namespace Zenkoban.Assets.Levels
 			if (GUILayout.Button("EMPTY"))
 			{
 				current = TileType.Empty;
+			}
+			
+			if (GUILayout.Button("ICE"))
+			{
+				current = TileType.Ice;
 			}
 			
 			if (GUILayout.Button("WALL"))

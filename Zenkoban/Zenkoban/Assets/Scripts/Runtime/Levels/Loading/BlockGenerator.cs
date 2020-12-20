@@ -11,6 +11,7 @@ namespace Zenkoban.Runtime.Levels.Loading
 		{
 			{TileType.Empty, BlockType.None},
 			{TileType.Floor, BlockType.None},
+			{TileType.Ice, BlockType.None},
 			{TileType.Goal, BlockType.None},
 			{TileType.Block, BlockType.Block},
 			{TileType.Player, BlockType.Player},

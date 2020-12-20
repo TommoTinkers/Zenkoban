@@ -20,6 +20,8 @@ namespace Zenkoban.Runtime.Views.Level
 
 		public GameObject[] Floor => floor;
 
+		public GameObject IceFloor => iceFloor;
+
 		[SerializeField]
 		private GameBlock player = null;
 
@@ -37,6 +39,9 @@ namespace Zenkoban.Runtime.Views.Level
 
 		[SerializeField]
 		private GameBlock mirrorBlock = null;
+
+		[SerializeField]
+		private GameObject iceFloor = null;
 
 	}
 }
