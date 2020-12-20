@@ -30,3 +30,5 @@ MonoBehaviour:
   wall: {fileID: -8190958063786148707, guid: 5b5c9016618c2264da0f33536c3006b6, type: 3}
   mirrorBlock: {fileID: -1403744996928170531, guid: fc3ee25976679e544805eaf1ac152ed8,
     type: 3}
+  iceFloor: {fileID: 8496443402855469934, guid: 52d14425f1969974d8768d8b9741d464,
+    type: 3}
