@@ -38,24 +38,31 @@ namespace Zenkoban.Runtime.Logic
 		
 		private void Move(MoveDirection direction)
 		{
-
-
 			var sequencer = new MoveSequencer(level);
 
 			var playerPos = level.FindPlayer();
 			var playerDest = playerPos + direction;
-			
-			HandleBlockPush(direction, playerDest, sequencer);
 
-			HandleMirrorBlockPush(direction, playerDest, sequencer);
+			var moveType = DetermineMoveType(playerDest);
 
-			if (level.IsNone(playerDest))
+			switch (moveType)
 			{
-				playerDest = level.GetSlidePoint(playerDest, direction);
+				case MoveType.Normal:
+					playerDest = level.GetSlidePoint(playerDest, direction);
+					break;
+				case MoveType.BlockPush:
+					HandleBlockPush(direction, playerDest, sequencer);
+					break;
+				case MoveType.MirrorBlockPush:
+					HandleMirrorBlockPush(direction, playerDest, sequencer);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
-
+			
 			sequencer.SequenceMove(playerPos, playerDest);
-
+			
+			
 			(var forward, var undo) = sequencer.CreateDispatchPair(NotifiyOnMove);
 
 			undoStack.Push(undo);
@@ -65,8 +72,6 @@ namespace Zenkoban.Runtime.Logic
 
 		private void HandleMirrorBlockPush(MoveDirection direction, LevelPoint playerDest, MoveSequencer sequencer)
 		{
-			if (level[playerDest].Type != BlockType.MirrorBlock) return;
-
 			sequencer.SequenceMove(playerDest, level.GetSlidePoint(playerDest + direction, direction));
 
 			var otherMirrorBlockLocations
@@ -88,8 +93,6 @@ namespace Zenkoban.Runtime.Logic
 
 		private void HandleBlockPush(MoveDirection direction, LevelPoint playerDest, MoveSequencer sequencer)
 		{
-			if (level[playerDest].Type != BlockType.Block) return;
-			
 			var slide = level.GetSlidePoint(playerDest + direction, direction);
 			sequencer.SequenceMove(playerDest, slide);
 		}
@@ -117,6 +120,21 @@ namespace Zenkoban.Runtime.Logic
 		private void NotifiyOnMove(IEnumerable<MoveNotification> notifications)
 		{
 			OnMove?.Invoke(notifications, HandleMoveComplete);
+		}
+
+		private MoveType DetermineMoveType(LevelPoint intendedPlayerDestination)
+		{
+			switch(level[intendedPlayerDestination].Type)
+			{
+				case BlockType.None:
+					return MoveType.Normal;
+				case BlockType.Block:
+					return MoveType.BlockPush;
+				case BlockType.MirrorBlock:
+					return MoveType.MirrorBlockPush;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 		}
 	}
 }
