@@ -4,7 +4,7 @@ namespace Zenkoban.Utils.Combinators
 {
 	public static class Combinators
 	{
-		public static Func<Action, Action> If(Func<bool> predicate)
+		public static Func<Action, Action> IfThen(Func<bool> predicate)
 		{
 			return actionToTakeOnSuccess =>
 			{

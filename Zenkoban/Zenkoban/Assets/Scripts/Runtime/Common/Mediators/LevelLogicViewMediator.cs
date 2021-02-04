@@ -9,7 +9,7 @@ using Zenkoban.Runtime.Events.InGameEvents;
 using Zenkoban.Runtime.Logic;
 using Zenkoban.Runtime.Views.Level;
 using Zenkoban.Runtime.Views.Level.Factories;
-using Zenkoban.Utils.Combinators;
+using static Zenkoban.Utils.Combinators.Combinators;
 
 namespace Zenkoban.Runtime.Common.Mediators
 {
@@ -45,39 +45,21 @@ namespace Zenkoban.Runtime.Common.Mediators
 
 		private void SubscribeToControls()
 		{
-			var WhenActiveDo = Combinators.If(() => isActive);
+			var ifActiveDo = IfThen(() => isActive);
 
-			movementInputProvider.OnMoveUp += WhenActiveDo(MoveUp);
-			movementInputProvider.OnMoveDown += WhenActiveDo(MoveDown);
-			movementInputProvider.OnMoveLeft += WhenActiveDo(MoveLeft);
-			movementInputProvider.OnMoveRight += WhenActiveDo(MoveRight);
-			movementInputProvider.OnUndo += WhenActiveDo(Undo);
+			movementInputProvider.OnMoveUp += ifActiveDo(MoveUp);
+			movementInputProvider.OnMoveDown += ifActiveDo(MoveDown);
+			movementInputProvider.OnMoveLeft += ifActiveDo(MoveLeft);
+			movementInputProvider.OnMoveRight += ifActiveDo(MoveRight);
+			movementInputProvider.OnUndo += ifActiveDo(Undo);
 		}
 
-		private void MoveUp()
-		{
-			logicProcessor.Move(MoveDirection.Up);
-		}
+		private void MoveUp() => logicProcessor.AttemptMove(MoveDirection.Up);
+		private void MoveDown() => logicProcessor.AttemptMove(MoveDirection.Down);
+		private void MoveLeft() => logicProcessor.AttemptMove(MoveDirection.Left);
+		private void MoveRight() => logicProcessor.AttemptMove(MoveDirection.Right);
+		private void Undo() => logicProcessor.Undo();
 		
-		private void MoveDown()
-		{
-			logicProcessor.Move(MoveDirection.Down);
-		}
-		
-		private void MoveLeft()
-		{
-			logicProcessor.Move(MoveDirection.Left);
-		}
-		
-		private void MoveRight()
-		{
-			logicProcessor.Move(MoveDirection.Right);
-		}
-		
-		private void Undo()
-		{
-			logicProcessor.Undo();
-		}
 
 		public void SetActive() => isActive = true;
 		public void SetInactive() => isActive = false;

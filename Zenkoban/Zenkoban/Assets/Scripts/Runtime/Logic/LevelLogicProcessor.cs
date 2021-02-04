@@ -28,16 +28,23 @@ namespace Zenkoban.Runtime.Logic
 			moveValidator = new MoveValidator(level);
 		}
 
-		public void Move(MoveDirection direction)
+		public void AttemptMove(MoveDirection direction)
 		{
 			if (isMoving) return;
 			if (!moveValidator.Validate(level.FindPlayer(), direction)) return;
+			
+			Move(direction);
+		}
+		
+		private void Move(MoveDirection direction)
+		{
+
 
 			var sequencer = new MoveSequencer(level);
 
 			var playerPos = level.FindPlayer();
 			var playerDest = playerPos + direction;
-
+			
 			HandleBlockPush(direction, playerDest, sequencer);
 
 			HandleMirrorBlockPush(direction, playerDest, sequencer);
@@ -81,11 +88,10 @@ namespace Zenkoban.Runtime.Logic
 
 		private void HandleBlockPush(MoveDirection direction, LevelPoint playerDest, MoveSequencer sequencer)
 		{
-			if (level[playerDest].Type == BlockType.Block)
-			{
-				var slide = level.GetSlidePoint(playerDest + direction, direction);
-				sequencer.SequenceMove(playerDest, slide);
-			}
+			if (level[playerDest].Type != BlockType.Block) return;
+			
+			var slide = level.GetSlidePoint(playerDest + direction, direction);
+			sequencer.SequenceMove(playerDest, slide);
 		}
 
 		public void Undo()

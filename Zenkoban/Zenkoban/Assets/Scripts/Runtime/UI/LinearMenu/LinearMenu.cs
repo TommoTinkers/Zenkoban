@@ -22,7 +22,7 @@ namespace Zenkoban.Runtime.UI.LinearMenu
 		
 		private void Awake()
 		{
-			var DoIfActive = Combinators.If(() => isActive);
+			var DoIfActive = Combinators.IfThen(() => isActive);
 			
 			inputProvider.OnUp += DoIfActive(MoveUp);
 			inputProvider.OnDown += DoIfActive(MoveDown);

@@ -38,7 +38,7 @@ namespace Zenkoban.Runtime.UI.Carousel
 		
 		private void Start()
 		{
-			var IfMenuEnabledThen = Combinators.If(() => menuEnabled);
+			var IfMenuEnabledThen = Combinators.IfThen(() => menuEnabled);
 
 			inputProvider.OnCycleLeft += IfMenuEnabledThen(CycleLeft);
 			inputProvider.OnCycleRight += IfMenuEnabledThen(CycleRight);
