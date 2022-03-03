@@ -22,5 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   mainLevels:
-  - {fileID: 11400000, guid: 5ea824421a7e1e14a9510762f59c30eb, type: 2}
   - {fileID: 11400000, guid: f4a1888f6ebe2ce4db5c422c3214383b, type: 2}
